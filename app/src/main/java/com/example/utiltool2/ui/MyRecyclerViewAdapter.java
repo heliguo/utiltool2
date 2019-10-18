@@ -75,7 +75,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         if (onItemClickListener != null) {
             onItemClickListener.onItemLongClick(v, ((int) v.getTag()));
         }
-        return true;
+        return true;//返回true，拦截onClick事件，false不拦截onClick事件
     }
 
     public void removeData(int position) {
