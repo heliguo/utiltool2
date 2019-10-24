@@ -1,4 +1,4 @@
-package com.example.utiltool2.ui;
+package com.example.utiltool2.ui.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
