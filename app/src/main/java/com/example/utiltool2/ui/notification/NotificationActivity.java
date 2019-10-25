@@ -14,15 +14,15 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.MainActivity;
 import com.example.utiltool2.R;
 
 /**
  * author:lgh on 2019-10-24 09:18
  */
-public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
+public class NotificationActivity extends BaseActivity implements View.OnClickListener {
 
     private RadioGroup radioGroup;
     private NotificationManager notificationManager;

@@ -21,5 +21,4 @@ public class HScroview extends HorizontalScrollView {
         super(context, attrs, defStyleAttr);
     }
 
-
 }

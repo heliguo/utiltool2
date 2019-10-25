@@ -1,23 +1,22 @@
 package com.example.utiltool2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.utiltool2.ui.cardview.CardViewActivity;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);//加载后更换主题
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.btn_recyclerview).setOnClickListener(this);
         findViewById(R.id.btn_notification).setOnClickListener(this);
+        findViewById(R.id.btn_cardview).setOnClickListener(this);
 
     }
 
@@ -30,7 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_notification:
                 startActivity(new Intent(MainActivity.this, NotificationActivity.class));
                 break;
-
+            case R.id.btn_cardview:
+                startActivity(new Intent(MainActivity.this, CardViewActivity.class));
+                break;
 
         }
     }

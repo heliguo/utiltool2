@@ -23,6 +23,8 @@
 
         </activity>
         <activity android:name=".ui.notification.NotificationActivity" />
+        <activity android:name=".ui.cardview.CardViewActivity" />
+        <activity android:name=".BaseActivity" />
     </application>
 
 </manifest>

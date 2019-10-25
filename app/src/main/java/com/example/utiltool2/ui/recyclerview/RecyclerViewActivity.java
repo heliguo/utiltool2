@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.R;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * author:lgh on 2019-10-17 14:50
  */
-public class RecyclerViewActivity extends AppCompatActivity {
+public class RecyclerViewActivity extends BaseActivity {
 
     private MyRecyclerViewAdapter adapter;
     private List<String> list;
@@ -81,7 +81,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4,
                 StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        staggeredHomeAdapter = new StaggeredHomeAdapter(this,list);
+        staggeredHomeAdapter = new StaggeredHomeAdapter(this, list);
         staggeredHomeAdapter.setOnItemClickLitener(new StaggeredHomeAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
