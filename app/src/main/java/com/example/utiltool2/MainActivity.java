@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.utiltool2.ui.ScreenActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
+import com.example.utiltool2.ui.slideview.ViewSlideActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -17,6 +19,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_recyclerview).setOnClickListener(this);
         findViewById(R.id.btn_notification).setOnClickListener(this);
         findViewById(R.id.btn_cardview).setOnClickListener(this);
+        findViewById(R.id.btn_slideview).setOnClickListener(this);
+        findViewById(R.id.btn_screen_draw).setOnClickListener(this);
 
     }
 
@@ -31,6 +35,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_cardview:
                 startActivity(new Intent(MainActivity.this, CardViewActivity.class));
+                break;
+            case R.id.btn_slideview:
+                startActivity(new Intent(MainActivity.this, ViewSlideActivity.class));
+                break;
+
+            case R.id.btn_screen_draw:
+                startActivity(new Intent(MainActivity.this, ScreenActivity.class));
                 break;
 
         }
