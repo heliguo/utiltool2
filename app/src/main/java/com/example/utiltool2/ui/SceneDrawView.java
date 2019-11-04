@@ -99,7 +99,7 @@ public class SceneDrawView extends View {
 
         btnPaint = new Paint();//按钮
         btnPaint.setAntiAlias(true);
-        btnPaint.setColor(Color.rgb(230, 230, 230));
+        btnPaint.setColor(Color.RED);
 
     }
 
@@ -107,22 +107,22 @@ public class SceneDrawView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //背景图
-        canvas.drawBitmap(bitmap, 0, 0, null);//将原图放置在画布上
+//        canvas.drawBitmap(bitmap, 0, 0, null);//将原图放置在画布上
 
         //左1杆
-        canvas.drawRect(new RectF(SCREEN_WIDTH * LEFT_1_LEFT, SCREEN_HEIGHT * LEFT_1_TOP,
-                SCREEN_WIDTH * (BRAKE_LENGTH + LEFT_1_LEFT), SCREEN_HEIGHT * LEFT_1_TOP), btnPaint);
+        canvas.drawLine(SCREEN_WIDTH * LEFT_1_LEFT, SCREEN_HEIGHT * LEFT_1_TOP,
+                SCREEN_WIDTH * (BRAKE_LENGTH + LEFT_1_LEFT), SCREEN_HEIGHT * LEFT_1_TOP, btnPaint);
 
         //左2杆
-        canvas.drawRect(new RectF(SCREEN_WIDTH * LEFT_2_LEFT, SCREEN_HEIGHT * LEFT_2_TOP,
-                SCREEN_WIDTH * (LEFT_2_LEFT - BRAKE_LENGTH), SCREEN_HEIGHT * LEFT_2_TOP), btnPaint);
+        canvas.drawLine(SCREEN_WIDTH * LEFT_2_LEFT, SCREEN_HEIGHT * LEFT_2_TOP,
+                SCREEN_WIDTH * (LEFT_2_LEFT - BRAKE_LENGTH), SCREEN_HEIGHT * LEFT_2_TOP, btnPaint);
 
         //右1杆
-        canvas.drawRect(new RectF(SCREEN_WIDTH * RIGHT_1_LEFT, SCREEN_HEIGHT * RIGHT_1_TOP,
-                SCREEN_WIDTH * (RIGHT_1_LEFT - BRAKE_LENGTH), SCREEN_HEIGHT * RIGHT_1_TOP), btnPaint);
+        canvas.drawLine(SCREEN_WIDTH * RIGHT_1_LEFT, SCREEN_HEIGHT * RIGHT_1_TOP,
+                SCREEN_WIDTH * (RIGHT_1_LEFT - BRAKE_LENGTH), SCREEN_HEIGHT * RIGHT_1_TOP, btnPaint);
 
         //右2杆
-        canvas.drawRect(new RectF(SCREEN_WIDTH * RIGHT_2_LEFT, SCREEN_HEIGHT * RIGHT_2_TOP,
-                SCREEN_WIDTH * (RIGHT_2_LEFT - BRAKE_LENGTH), SCREEN_HEIGHT * RIGHT_2_TOP), btnPaint);
+        canvas.drawLine(SCREEN_WIDTH * RIGHT_2_LEFT, SCREEN_HEIGHT * RIGHT_2_TOP,
+                SCREEN_WIDTH * (RIGHT_2_LEFT - BRAKE_LENGTH), SCREEN_HEIGHT * RIGHT_2_TOP, btnPaint);
     }
 }

@@ -15,7 +15,7 @@ public class ScreenActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen);
-        sceneDrawView = findViewById(R.id.screen_view);
+        sceneDrawView = (SceneDrawView) this.findViewById(R.id.screen_view);
 
     }
 }
