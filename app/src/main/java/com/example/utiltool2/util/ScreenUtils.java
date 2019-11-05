@@ -49,7 +49,10 @@ public class ScreenUtils {
         if (null == context) {
             return 0;
         }
-        return context.getResources().getDisplayMetrics().widthPixels;
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
     }
 
     //获取手机屏幕高度
@@ -57,7 +60,11 @@ public class ScreenUtils {
         if (null == context) {
             return 0;
         }
-        return context.getResources().getDisplayMetrics().heightPixels;
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
+
     }
 
     public static int getLayoutHeight(Activity activity) {
