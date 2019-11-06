@@ -270,7 +270,7 @@ public class SceneDrawView extends View {
 
                     case 2:
                         scale2Y = (float) (1 + (float) animation.getAnimatedValue() * 0.001);
-                        scale2X = (float) (1 - (float) animation.getAnimatedValue() * 0.8);
+                        scale2X = (float) (1 - (float) animation.getAnimatedValue() * 0.9);
                         break;
 
                     case 3:

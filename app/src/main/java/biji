@@ -1,0 +1,24 @@
+动态代理
+
+AspectJ 横切面
+
+最原始方法
+Test.java  ---> javac ----> Test.class
+Test.java  ---> javac + AspectJ ----> Test.class
+
+例如
+
+@NetworkCheck
+  public void start(){
+
+     add code
+       ...
+
+     方法体
+       ...
+
+     add code
+
+}
+
+日志埋点、权限申请、网络监测、集中式登陆......
