@@ -21,6 +21,11 @@ public class ScreenActivity extends BaseActivity implements View.OnClickListener
 
         sceneDrawView = this.findViewById(R.id.screen_view);
         sceneDrawView.setOnClickListener(this);
+        sceneDrawView.setText1("3号闸");
+        sceneDrawView.setText2("4号闸");
+        sceneDrawView.setText3("1号闸");
+        sceneDrawView.setText4("2号闸");
+        sceneDrawView.setOffset(40);
         sceneDrawView.setShowTG(true);
     }
 
@@ -43,7 +48,10 @@ public class ScreenActivity extends BaseActivity implements View.OnClickListener
                         break;
                     case 2:
                         toast = Toast.makeText(this, "3", Toast.LENGTH_SHORT);
-                        sceneDrawView.startAnimator(3);
+//                        sceneDrawView.startAnimator(3);
+                        sceneDrawView.reset(1);
+                        sceneDrawView.reset(2);
+                        sceneDrawView.reset(4);
                         break;
                     case 3:
                         toast = Toast.makeText(this, "4", Toast.LENGTH_SHORT);

@@ -22,8 +22,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_recyclerview).setOnClickListener(this);
         findViewById(R.id.btn_notification).setOnClickListener(this);
         findViewById(R.id.btn_cardview).setOnClickListener(this);
-//        findViewById(R.id.btn_slideview).setOnClickListener(this);
-//        findViewById(R.id.btn_screen_draw).setOnClickListener(this);
+        findViewById(R.id.btn_screen_draw).setOnClickListener(this);
+        findViewById(R.id.btn_slideview).setOnClickListener(this);
 
     }
 
@@ -42,24 +42,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //            case R.id.btn_slideview:
 //                startActivity(new Intent(MainActivity.this, ViewSlideActivity.class));
 //                break;
-//
-//            case R.id.btn_screen_draw:
-//                startActivity(new Intent(MainActivity.this, ScreenActivity.class));
-//                break;
+
+            case R.id.btn_screen_draw:
+                startActivity(new Intent(MainActivity.this, ScreenActivity.class));
+                break;
 
         }
     }
+
     @NetworkCheck
-    public void hasNetwork(){
+    public void hasNetwork() {
         //有网操作
     }
+
     @NoNetworkShow
-    public void noNetwork(){
+    public void noNetwork() {
         //无网操作
     }
 
     @LogRecord("登陆操作")//日志埋点
-    public void doLogin(){
+    public void doLogin() {
 
     }
 }
