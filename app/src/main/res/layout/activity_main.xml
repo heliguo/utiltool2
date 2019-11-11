@@ -7,6 +7,13 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/btn_glide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义Glide"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/btn_screen_draw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

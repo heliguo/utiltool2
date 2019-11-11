@@ -1,7 +1,11 @@
 package com.example.utiltool2.ui;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -18,6 +22,8 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,34 +33,17 @@ import java.util.List;
  */
 public class SceneDrawView extends View {
 
-    /**
-     * 现场图比例
-     */
-
-    //水平杆长
-    private double brakeLength = 170.0 / 1080;
-
-    private double left1Top = 310.0 / 1920;//左1 top
-
-    private double left1Left = 212.0 / 1080;//左1 left
-
-    private double left2Top = 1077.0 / 1920;//左2 top
-
-    private double left2Left = 410.0 / 1080;//左2 left
-
-    private double right1Top = 313.0 / 1920;//右1 top
-
-    private double right1Left = 960.0 / 1080;//右1 left
-
-    private double right2Top = 1075.0 / 1920;//右2 top
-
-    private double right2Left = 955.0 / 1080;//右2 left
-
     private Paint paint;//抬杆画笔
-//    private Paint btnPaint;//按钮画笔
-//    private Paint textPaint;//文字画笔
 
     private List<Region> regions;
+
+    private RectF rectF;
+    private Rect rect;
+    private Region region1;
+    private Region region2;
+    private Region region3;
+    private Region region4;
+    private Region region;
 
     private Path path;
 
@@ -79,6 +68,20 @@ public class SceneDrawView extends View {
 
     private boolean showTG;//是否显示抬杆
 
+    private int screenWidth;
+    private int screenHeight;
+
+    private BitmapFactory.Options mOption;
+    private BitmapRegionDecoder mDecoder;
+    private Bitmap mBitmap;
+    private int mImageHeight;
+    private int mImageWidth;
+    private int mViewHeight;
+    private int mViewWidth;
+    private float mScaleX;
+    private float mScaleY;
+    private Rect mRect;
+
     public SceneDrawView(Context context) {
         this(context, null);
     }
@@ -96,18 +99,105 @@ public class SceneDrawView extends View {
         path = new Path();
         paint = new Paint();
         regions = new ArrayList<>();
+        rectF = new RectF();
+        rect = new Rect();
+        region1 = new Region();
+        region2 = new Region();
+        region3 = new Region();
+        region4 = new Region();
+        region = new Region();
+        mOption = new BitmapFactory.Options();
+        mRect = new Rect();
     }
+
+    //组件大小发生变化时的回调
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if (oldh != h) {
+            WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            if (windowManager != null) {
+                windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+            }
+            screenWidth = displayMetrics.widthPixels;
+            screenHeight = displayMetrics.heightPixels;
+            Log.d("======>", "onSizeChanged: " + h + "  " + oldh);
+        }
+    }
+
+    //2、设置图片，得到图片信息，加载部分图片
+    public void setImage(InputStream is) {
+        //获取图片宽和高，不能将整个图片加载
+        mOption.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(is, null, mOption);
+        mImageWidth = mOption.outWidth;
+        mImageHeight = mOption.outHeight;
+
+        //开始复用
+        mOption.inMutable = true;
+        //设置格式GBR565
+        mOption.inPreferredConfig = Bitmap.Config.RGB_565;
+
+        mOption.inJustDecodeBounds = false;
+
+        //创建区域解码器
+        try {
+            mDecoder = BitmapRegionDecoder.newInstance(is, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        requestLayout();
+    }
+//    //3、测量Imageview缩放比例
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        mViewWidth = getMeasuredWidth();
+//        mViewHeight = getMeasuredHeight();
+//
+//        //确定图片加载区域
+//        mRect.left = 0;
+//        mRect.top = 0;
+//        mRect.right = mImageWidth;//上下
+////        mRect.bottom=mImageHeight;//左右
+//        mScaleX = mViewWidth / (float) mImageWidth;//缩放比例
+//        mScaleY = mImageHeight/(float)mViewHeight;
+//        mRect.bottom = (int) (mViewHeight / mScaleX);
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
 
-        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+//        //复用内存 复用的bitmap必须与即将解码的bitmap尺寸一致
+//        mOption.inBitmap = mBitmap;
+//        //指定解码区域
+//        mBitmap = mDecoder.decodeRegion(mRect, mOption);
+//        //得到矩阵缩放
+//        Matrix matrix = new Matrix();
+//        matrix.setScale(mScaleX, mScaleX);
+//        canvas.drawBitmap(mBitmap, matrix, null);
 
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-        Log.d("======>", "onDraw: " + screenWidth + "  " + screenHeight);
+        //左2 left
+        double left2Left = 410.0 / 1080;
+        //水平杆长
+        double brakeLength = 170.0 / 1080;
+        //左1 top
+        double left1Top = 310.0 / 1920;
+        //左1 left
+        double left1Left = 212.0 / 1080;
+        //左2 top
+        double left2Top = 1077.0 / 1920;
+        //右1 top
+        double right1Top = 313.0 / 1920;
+        //右1 left
+        double right1Left = 960.0 / 1080;
+        //右2 top
+        double right2Top = 1075.0 / 1920;
+        //右2 left
+        double right2Left = 955.0 / 1080;
 
         if (showTG) {
             //左1杆
@@ -131,9 +221,11 @@ public class SceneDrawView extends View {
                     (float) (screenWidth * (right1Left - brakeLength * scale4X)), (float) (screenHeight * right2Top * scale4Y), paint);
         }
 
-        RectF rectF = new RectF((float) (screenWidth * left1Left), (float) (screenHeight * left1Top) - 190,
+        path.reset();//很有必要
+
+        //1 rectF
+        rectF.set((float) (screenWidth * left1Left), (float) (screenHeight * left1Top) - 190,
                 (float) (screenWidth * (brakeLength + left1Left)) + 20, (float) (screenHeight * left1Top) - 80);
-        Rect rect = new Rect();
 
         paint.reset();
         paint.setAntiAlias(true);
@@ -141,50 +233,66 @@ public class SceneDrawView extends View {
         path.addRoundRect(rectF, 8, 8, Path.Direction.CCW);
         canvas.drawPath(path, paint);
 
+        //1 region
         rectF.roundOut(rect);
-        Region region1 = new Region();
-        region1.setPath(path, new Region(rect));
+        region.setEmpty();
+        region.set(rect);
+        region1.setPath(path, region);
         if (!regions.contains(region1))
             regions.add(region1);
+
+        //2 rectF
         path.reset();
         rectF.setEmpty();
-        rectF = new RectF((float) (screenWidth * (left2Left - brakeLength)) - 20, (float) (screenHeight * left2Top) + 50,
+        rectF.set((float) (screenWidth * (left2Left - brakeLength)) - 20, (float) (screenHeight * left2Top) + 50,
                 (float) (screenWidth * left2Left), (float) (screenHeight * left2Top) + 160);
-        rect.setEmpty();
-        rectF.roundOut(rect);
         path.addRoundRect(rectF, 8, 8, Path.Direction.CCW);
         canvas.drawPath(path, paint);
-        Region region2 = new Region();
-        region2.setPath(path, new Region(rect));
+
+        //2 region
+        rect.setEmpty();
+        rectF.roundOut(rect);
+        region.setEmpty();
+        region.set(rect);
+        region2.setPath(path, region);
         if (!regions.contains(region2))
             regions.add(region2);
 
+        //3 rectF
         path.reset();
         rectF.setEmpty();
-        rectF = new RectF((float) (screenWidth * (right1Left - brakeLength)) - 20, (float) (screenHeight * right1Top) - 190,
+        rectF.set((float) (screenWidth * (right1Left - brakeLength)) - 20, (float) (screenHeight * right1Top) - 190,
                 (float) (screenWidth * right1Left), (float) (screenHeight * right1Top) - 80);
-        rect.setEmpty();
-        rectF.roundOut(rect);
         path.addRoundRect(rectF, 8, 8, Path.Direction.CCW);
         canvas.drawPath(path, paint);
-        Region region3 = new Region();
-        region3.setPath(path, new Region(rect));
+
+        //3 region
+        rect.setEmpty();
+        rectF.roundOut(rect);
+        region.setEmpty();
+        region.set(rect);
+        region3.setPath(path, region);
         if (!regions.contains(region3))
             regions.add(region3);
 
+        //4 rectF
         path.reset();
         rectF.setEmpty();
-        rectF = new RectF((float) (screenWidth * (right1Left - brakeLength)) - 20, (float) (screenHeight * right2Top) + 50,
-                (float) (screenWidth * right1Left), (float) (screenHeight * right2Top) + 160);
-        rect.setEmpty();
-        rectF.roundOut(rect);
+        rectF.set((float) (screenWidth * (right2Left - brakeLength)) - 20, (float) (screenHeight * right2Top) + 50,
+                (float) (screenWidth * right2Left), (float) (screenHeight * right2Top) + 160);
         path.addRoundRect(rectF, 8, 8, Path.Direction.CCW);
         canvas.drawPath(path, paint);
-        Region region4 = new Region();
-        region4.setPath(path, new Region(rect));
+
+        //4 region
+        rect.setEmpty();
+        rectF.roundOut(rect);
+        region.setEmpty();
+        region.set(rect);
+        region4.setPath(path, region);
         if (!regions.contains(region4))
             regions.add(region4);
 
+        //text
         paint.reset();
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
@@ -193,9 +301,10 @@ public class SceneDrawView extends View {
         canvas.drawText(text2, (float) (screenWidth * (left2Left - brakeLength)) - 10 + offset, (float) (screenHeight * left2Top) + 115, paint);
         canvas.drawText(text3, (float) (screenWidth * (right1Left - brakeLength)) - 10 + offset, (float) (screenHeight * right1Top) - 120, paint);
         canvas.drawText(text4, (float) (screenWidth * (right1Left - brakeLength)) - 10 + offset, (float) (screenHeight * right2Top) + 115, paint);
-        super.onDraw(canvas);
+
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
