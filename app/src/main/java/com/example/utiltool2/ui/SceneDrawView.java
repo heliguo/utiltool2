@@ -434,4 +434,24 @@ public class SceneDrawView extends View {
         animator.start();
     }
 
+    //清理内存
+    public void clear() {
+        rect.setEmpty();
+        rectF.setEmpty();
+        region.setEmpty();
+        region1.setEmpty();
+        region2.setEmpty();
+        region3.setEmpty();
+        region4.setEmpty();
+        regions.clear();
+        paint.reset();
+        path.reset();
+        mRect.setEmpty();
+        matrix.reset();
+        mDecoder.recycle();
+        mOption = null;
+        mBitmap.recycle();
+        clearAnimation();
+    }
+
 }
