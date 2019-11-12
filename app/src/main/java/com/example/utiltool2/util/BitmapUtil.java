@@ -1,9 +1,13 @@
 package com.example.utiltool2.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * author:lgh on 2019-11-08 09:17
@@ -29,5 +33,15 @@ public class BitmapUtil {
         // 将drawable 内容画到画布中
         drawable.draw(canvas);
         return bitmap;
+    }
+
+    /**
+     * 把Bitmap转Byte
+     */
+    public static byte[] Bitmap2Bytes(Context context,int resId, int quality) {
+        Bitmap bm = BitmapFactory.decodeResource(context.getResources(),resId);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, quality, baos);
+        return baos.toByteArray();
     }
 }

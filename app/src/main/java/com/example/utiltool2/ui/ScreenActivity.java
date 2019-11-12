@@ -6,6 +6,9 @@ import android.widget.Toast;
 
 import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.R;
+import com.example.utiltool2.util.BitmapUtil;
+
+import java.io.InputStream;
 
 
 /**
@@ -21,6 +24,13 @@ public class ScreenActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.activity_screen);
 
         sceneDrawView = this.findViewById(R.id.screen_view);
+        InputStream in = null;
+        try {
+            in = getAssets().open("back_brake.jpg");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sceneDrawView.setImage(in);
         sceneDrawView.setOnClickListener(this);
         sceneDrawView.setText1("3号闸");
         sceneDrawView.setText2("4号闸");
