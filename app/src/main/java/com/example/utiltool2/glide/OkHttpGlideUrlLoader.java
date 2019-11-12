@@ -40,6 +40,7 @@ public class OkHttpGlideUrlLoader implements ModelLoader<GlideUrl, InputStream> 
         return true;
     }
 
+    //工厂
     public static class Factory implements ModelLoaderFactory<GlideUrl, InputStream> {
 
         private OkHttpClient client;
@@ -61,6 +62,7 @@ public class OkHttpGlideUrlLoader implements ModelLoader<GlideUrl, InputStream> 
         @NonNull
         @Override
         public ModelLoader<GlideUrl, InputStream> build(@NonNull MultiModelLoaderFactory multiFactory) {
+            //将OkHttpClient传入OkHttpGlideUrlLoader构造方法
             return new OkHttpGlideUrlLoader(getOkHttpClient());
         }
 

@@ -32,6 +32,16 @@ public class MyAppGlideModule extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
 //        super.registerComponents(context, glide, registry);
+        //替换通讯组件
         registry.append(GlideUrl.class, InputStream.class,  new OkHttpGlideUrlLoader.Factory());
+    }
+
+    /** 报错处理
+     * "void com.bumptech.glide.module.RegistersComponents.registerComponents(android.content.Context, com.bumptech.glide.Glide, com.bumptech.glide.Registry)"
+     * @return
+     */
+    @Override
+    public boolean isManifestParsingEnabled() {
+        return false;
     }
 }

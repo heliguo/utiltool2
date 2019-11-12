@@ -58,21 +58,28 @@ public class GlideActivity extends BaseActivity {
 //                scaleImageView.setImage(ImageSource.bitmap(resource));
 //            }
 //        };
-        Glide.with(this)
-                .load("http://guolin.tech/book.png")
-                .apply(options)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        return false;
-                    }
+//        Glide.with(this)
+//                .load("http://guolin.tech/book.png")
+//                .apply(options)
+//                .listener(new RequestListener<Drawable>() {
+//                    @Override
+//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                        return false;
+//                    }
+//                })
+//                .into(target);
+////                .into(myLayout.getTarget());//背景
 
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
+        //测试自定义模块OKHTTP
+        Glide.with(GlideActivity.this)
+                .load("http://guolin.tech/book.png")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(target);
-//                .into(myLayout.getTarget());//背景
     }
 }
