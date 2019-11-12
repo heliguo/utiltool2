@@ -15,6 +15,8 @@ import com.bumptech.glide.module.AppGlideModule;
 
 import java.io.InputStream;
 
+import okhttp3.OkHttpClient;
+
 /**
  * author:lgh on 2019-11-08 11:08
  */
@@ -31,14 +33,16 @@ public class MyAppGlideModule extends AppGlideModule {
 
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
-//        super.registerComponents(context, glide, registry);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(new ProgressInterceptor());
+        OkHttpClient client = builder.build();
         //替换通讯组件
-        registry.append(GlideUrl.class, InputStream.class,  new OkHttpGlideUrlLoader.Factory());
+        registry.append(GlideUrl.class, InputStream.class,  new OkHttpGlideUrlLoader.Factory(client));
     }
 
     /** 报错处理
      * "void com.bumptech.glide.module.RegistersComponents.registerComponents(android.content.Context, com.bumptech.glide.Glide, com.bumptech.glide.Registry)"
-     * @return
+     * @return false
      */
     @Override
     public boolean isManifestParsingEnabled() {
