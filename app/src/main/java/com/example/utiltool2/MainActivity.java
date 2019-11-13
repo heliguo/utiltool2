@@ -9,6 +9,7 @@ import com.example.utiltool2.annotation.NetworkCheck;
 import com.example.utiltool2.annotation.NoNetworkShow;
 import com.example.utiltool2.glide.GlideActivity;
 import com.example.utiltool2.ui.ScreenActivity;
+import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
@@ -25,7 +26,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_screen_draw).setOnClickListener(this);
         findViewById(R.id.btn_slideview).setOnClickListener(this);
         findViewById(R.id.btn_glide).setOnClickListener(this);
-
+        findViewById(R.id.btn_treeview).setOnClickListener(this);
     }
 
     @Override
@@ -49,6 +50,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_glide:
                 startActivity(new Intent(MainActivity.this, GlideActivity.class));
+                break;
+            case R.id.btn_treeview:
+                startActivity(new Intent(MainActivity.this, TreeViewActivity.class));
+
                 break;
         }
     }
