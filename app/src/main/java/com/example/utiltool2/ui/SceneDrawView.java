@@ -71,6 +71,8 @@ public class SceneDrawView extends View {
 
     private boolean showTG;//是否显示抬杆
 
+    private boolean isShowBG;//背景图是否已加载
+
     private int screenWidth;
     private int screenHeight;
 
@@ -117,6 +119,7 @@ public class SceneDrawView extends View {
 
     //2、设置图片，得到图片信息，加载部分图片
     public void setImage(InputStream is) {
+        isShowBG = true;
         //获取图片宽和高，不能将整个图片加载
         mOption.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(is, null, mOption);
@@ -139,6 +142,22 @@ public class SceneDrawView extends View {
         requestLayout();
     }
 
+    //组件大小发生变化时的回调
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if (oldh != h) {
+            WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            if (windowManager != null) {
+                windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+            }
+            screenWidth = displayMetrics.widthPixels;
+            screenHeight = displayMetrics.heightPixels;
+            isShowBG = true;//屏幕尺寸改变缩放比例改变需要重新解码
+        }
+    }
+
     //3、测量Imageview缩放比例
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -156,35 +175,25 @@ public class SceneDrawView extends View {
         mScaleY = mViewHeight / (float) mImageHeight;//上下缩放比例
     }
 
-    //组件大小发生变化时的回调
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (oldh != h) {
-            WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            if (windowManager != null) {
-                windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-            }
-            screenWidth = displayMetrics.widthPixels;
-            screenHeight = displayMetrics.heightPixels;
-        }
-    }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if (mDecoder != null) {
-            //复用内存 复用的bitmap必须与即将解码的bitmap尺寸一致
-            mOption.inBitmap = mBitmap;
-            //指定解码区域
-            mBitmap = mDecoder.decodeRegion(mRect, mOption);
-            //得到矩阵缩放
-            matrix.setScale(mScaleX, mScaleY);
+        if (isShowBG) {//解码耗费资源故只执行一次
+            if (mDecoder != null) {
+                //复用内存 复用的bitmap必须与即将解码的bitmap尺寸一致
+                mOption.inBitmap = mBitmap;
+                //指定解码区域
+                mBitmap = mDecoder.decodeRegion(mRect, mOption);
+                //得到矩阵缩放
+                matrix.setScale(mScaleX, mScaleY);
+                canvas.drawBitmap(mBitmap, matrix, null);
+            }
+        } else {//每次调用invalidate方法需要加载背景图，不需要再次解码
             canvas.drawBitmap(mBitmap, matrix, null);
         }
+        isShowBG = false;
 
         //左2 left
         double left2Left = 410.0 / 1080;
@@ -209,6 +218,7 @@ public class SceneDrawView extends View {
             //左1杆
             paint.reset();
             paint.setAntiAlias(true);
+            paint.setDither(true);//防抖动
             paint.setColor(0xff8B4513);
             paint.setStrokeWidth(10);
             canvas.drawLine((float) (screenWidth * left1Left), (float) (screenHeight * left1Top),
