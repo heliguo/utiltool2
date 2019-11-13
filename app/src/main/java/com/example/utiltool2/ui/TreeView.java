@@ -33,6 +33,8 @@ public class TreeView extends View {
     public TreeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         paint = new Paint();
+        paint.setDither(true);
+        paint.setAntiAlias(true);
         grawBranches = new LinkedList<>();
         grawBranches.add(getBranches());
     }
@@ -43,7 +45,7 @@ public class TreeView extends View {
                 {2, 1, 132, 245, 116, 240, 76, 205, 2, 40},
                 {3, 0, 232, 255, 282, 166, 362, 155, 12, 100},
                 {4, 3, 260, 210, 330, 219, 343, 236, 3, 80},
-                {5, 0, 217, 91, 219, 58, 216, 27, 27, 3, 40},
+                {5, 0, 217, 91, 219, 58, 216, 27, 3, 40},
                 {6, 0, 228, 207, 95, 57, 10, 54, 9, 80},
                 {7, 6, 109, 96, 65, 63, 53, 15, 2, 40},
                 {8, 6, 180, 155, 117, 125, 77, 140, 4, 60},
@@ -59,11 +61,11 @@ public class TreeView extends View {
             //判断父节点
             int parentId = data[i][1];
             if (parentId != -1) {
-                branchs[parentId].addChildBranch(branchs[i]);
+                branchs[parentId].addChildBranch(branchs[i]);//保存分支
 
             }
         }
-        return branchs[0];
+        return branchs[0];//绘制主干
     }
 
     @Override
@@ -86,22 +88,25 @@ public class TreeView extends View {
             LinkedList<Branch> temBranches = null;
             while (iterator.hasNext()) {
                 Branch branch = iterator.next();
+                treeCanvas.save();
+                treeCanvas.translate(getWidth()/2-217,getHeight()-490);
                 if (!branch.grow(treeCanvas, paint, 1)) {
                     iterator.remove();
                     //是否有分支
                     if (branch.childBranch != null) {
                         if (temBranches == null) {
                             temBranches = branch.childBranch;
-                        }else {
+                        } else {
                             temBranches.addAll(branch.childBranch);
                         }
                     }
                 }
+                treeCanvas.restore();
             }
-            if (temBranches!=null){
+            if (temBranches != null) {
                 grawBranches.addAll(temBranches);
             }
-            if (grawBranches!=null){
+            if (grawBranches != null) {
                 invalidate();
             }
         }
