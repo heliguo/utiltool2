@@ -27,6 +27,7 @@ public class GlideActivity extends BaseActivity {
 
     private SubsamplingScaleImageView scaleImageView;
     private MyLayout myLayout;
+    private String url = "http://192.168.20.140:8080/app/book.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class GlideActivity extends BaseActivity {
 
         //测试自定义模块OKHTTP
         Glide.with(GlideActivity.this)
-                .load("http://guolin.tech/book.png")
+                .load(url)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(target);

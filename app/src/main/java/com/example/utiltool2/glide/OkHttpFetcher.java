@@ -41,7 +41,7 @@ public class OkHttpFetcher implements DataFetcher<InputStream> {
             String key = headerEntry.getKey();
             requestBuilder.addHeader(key, headerEntry.getValue());
         }
-//        requestBuilder.addHeader("httplib", "OkHttp");
+        requestBuilder.addHeader("httplib", "OkHttp");
         Request request = requestBuilder.build();
         if (isCancelled) {
             return null;

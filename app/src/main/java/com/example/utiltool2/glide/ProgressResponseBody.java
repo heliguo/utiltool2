@@ -74,6 +74,7 @@ public class ProgressResponseBody extends ResponseBody {
                 totalBytesRead += byteRead;
             }
             int progress = (int) (100f * totalBytesRead / fullLength);
+            System.out.println("download progress is " + progress);
             Log.d(TAG, "download progress is " + progress);
             if (progressListener != null && progress != currentProgress) {
                 progressListener.onProgress(progress);

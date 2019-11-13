@@ -37,7 +37,7 @@ public class MyAppGlideModule extends AppGlideModule {
         builder.addInterceptor(new ProgressInterceptor());
         OkHttpClient client = builder.build();
         //替换通讯组件
-        registry.append(GlideUrl.class, InputStream.class,  new OkHttpGlideUrlLoader.Factory(client));
+        registry.replace(GlideUrl.class, InputStream.class,  new OkHttpGlideUrlLoader.Factory(client));
     }
 
     /** 报错处理

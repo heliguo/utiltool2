@@ -35,9 +35,8 @@ public class ProgressInterceptor implements Interceptor {
         String url = request.url().toString();
         ResponseBody body = response.body();
         System.out.println("intercept:1111 " + url);
-        Log.d("=======>", "intercept:1111 " + url);
         ResponseBody responseBody = new ProgressResponseBody(url, body);
-        Log.d("=======>", "intercept: " + responseBody.contentLength());
+        System.out.println("intercept:=======> " + responseBody.contentLength());
         Response newResponse = response.newBuilder().body(responseBody).build();
         return newResponse;
     }

@@ -371,10 +371,12 @@ public class SceneDrawView extends View {
 
     public void setTextSize(int textSize) {
         this.textSize = textSize;
+        invalidate();
     }
 
     public void setShowTG(boolean showTG) {
         this.showTG = showTG;
+        invalidate();
     }
 
     public void startAnimator(final int num) {
