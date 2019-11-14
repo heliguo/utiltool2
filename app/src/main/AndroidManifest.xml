@@ -30,6 +30,7 @@
         <activity android:name=".ui.slideview.ViewSlideActivity" />
         <activity android:name=".glide.GlideActivity" />
         <activity android:name=".ui.TreeViewActivity" />
+        <activity android:name=".adapter.RecyclerAdapterActivity" />
     </application>
 
 </manifest>

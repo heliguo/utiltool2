@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.utiltool2.adapter.RecyclerAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
 import com.example.utiltool2.annotation.NoNetworkShow;
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_screen_draw).setOnClickListener(this);
         findViewById(R.id.btn_slideview).setOnClickListener(this);
         findViewById(R.id.btn_glide).setOnClickListener(this);
-        findViewById(R.id.btn_treeview).setOnClickListener(this);
+        findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +55,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_treeview:
                 startActivity(new Intent(MainActivity.this, TreeViewActivity.class));
 
+                break;
+            case R.id.btn_recyclerview_adapter:
+                startActivity(new Intent(MainActivity.this, RecyclerAdapterActivity.class));
                 break;
         }
     }
