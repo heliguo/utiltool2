@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -37,6 +38,7 @@ public class TreeView extends View {
         paint.setAntiAlias(true);
         grawBranches = new LinkedList<>();
         grawBranches.add(getBranches());
+
     }
 
     private Branch getBranches() {
@@ -54,15 +56,13 @@ public class TreeView extends View {
 
         int n = data.length;
         Branch[] branchs = new Branch[n];
-
         //循环数据分组
         for (int i = 0; i < n; i++) {
             branchs[i] = new Branch(data[i]);
             //判断父节点
-            int parentId = data[i][1];
+            int parentId = data[i][1];//********
             if (parentId != -1) {
-                branchs[parentId].addChildBranch(branchs[i]);//保存分支
-
+                branchs[parentId].addChildBranch(branchs[i]);//保存相同父节点分支,非主干也有分支
             }
         }
         return branchs[0];//绘制主干
@@ -89,7 +89,7 @@ public class TreeView extends View {
             while (iterator.hasNext()) {
                 Branch branch = iterator.next();
                 treeCanvas.save();
-                treeCanvas.translate(getWidth()/2-217,getHeight()-490);
+                treeCanvas.translate(getWidth() / 2 - 217, getHeight() - 490);
                 if (!branch.grow(treeCanvas, paint, 1)) {
                     iterator.remove();
                     //是否有分支
@@ -109,6 +109,7 @@ public class TreeView extends View {
             if (grawBranches != null) {
                 invalidate();
             }
+
         }
     }
 }

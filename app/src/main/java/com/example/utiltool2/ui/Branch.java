@@ -43,6 +43,7 @@ public class Branch {
 
     }
 
+    //外部方法
     public void addChildBranch(Branch branch) {
         if (childBranch == null) {
             childBranch = new LinkedList<>();
@@ -87,10 +88,10 @@ public class Branch {
     //绘制
     private void draw(Canvas canvas, Paint paint, int scaleFactor) {
         paint.setColor(branchColor);
-        canvas.save();
+        canvas.save();//保存上一次绘制内容
         canvas.scale(scaleFactor, scaleFactor);
         canvas.drawCircle(grawX, grawY, radius, paint);
-        canvas.restore();
+        canvas.restore();//恢复上一次绘制内容
     }
 
 
