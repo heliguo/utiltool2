@@ -15,11 +15,9 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
@@ -147,13 +145,8 @@ public class SceneDrawView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (oldh != h) {
-            WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            if (windowManager != null) {
-                windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-            }
-            screenWidth = displayMetrics.widthPixels;
-            screenHeight = displayMetrics.heightPixels;
+            screenWidth = w;
+            screenHeight = h;
             isShowBG = true;//屏幕尺寸改变缩放比例改变需要重新解码
         }
     }
@@ -195,22 +188,22 @@ public class SceneDrawView extends View {
         }
         isShowBG = false;
 
-        //左2 left
-        double left2Left = 410.0 / 1080;
         //水平杆长
         double brakeLength = 170.0 / 1080;
         //左1 top
-        double left1Top = 310.0 / 1920;
+        double left1Top = 350.0 / 1920;
         //左1 left
         double left1Left = 212.0 / 1080;
         //左2 top
-        double left2Top = 1077.0 / 1920;
+        double left2Top = 1230.0 / 1920;
+        //左2 left
+        double left2Left = 410.0 / 1080;
         //右1 top
-        double right1Top = 313.0 / 1920;
+        double right1Top = 353.0 / 1920;
         //右1 left
         double right1Left = 960.0 / 1080;
         //右2 top
-        double right2Top = 1075.0 / 1920;
+        double right2Top = 1228.0 / 1920;
         //右2 left
         double right2Left = 955.0 / 1080;
 

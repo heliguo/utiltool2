@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_screen_draw).setOnClickListener(this);
         findViewById(R.id.btn_slideview).setOnClickListener(this);
         findViewById(R.id.btn_glide).setOnClickListener(this);
+        findViewById(R.id.btn_treeview).setOnClickListener(this);
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
     }
 

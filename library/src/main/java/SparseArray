@@ -1,0 +1,80 @@
+
+ SparseArrays 利用integer去管理object对象。不像一个正常的object对象数组，
+ 它能在索引数中快速的查找到所需的结果。（这句话是音译，原意是能在众多索引数中“撕开一个缺口”，
+ 为什么原文这么表达？下面会慢慢说清楚。）它比HashMap去通过Integer索引查找object对象时在内存上更具效率,
+ 不仅因为它避免了用来查找的自动“装箱”的keys，并且它的数据结构不依赖额外的对象去各个映射中查找匹配。
+
+ * SparseArrays map integers to Objects.  Unlike a normal array of Objects,
+ * there can be gaps in the indices.  It is intended to be more memory efficient
+ * than using a HashMap to map Integers to Objects, both because it avoids
+ * auto-boxing keys and its data structure doesn't rely on an extra entry object
+ * for each mapping.
+
+请注意，这个容器会保持它的映射关系在一个数组的数据结构中，通过二分检索法去查找key。
+（这里我们终于知道，为何这个工具类中,提供的添加映射关系的操作中，key的类型必须是integer。
+ 因为二分检索法，将从中间“切开”，integer的数据类型是实现这种检索过程的保证。）
+如果保存大量的数据，这种数据结构是不适合的，换言之，SparseArray这个工具类并不应该用于存储大量的数据。
+这种情况下，它的效率通常比传统的HashMap更低，因为它的查找方法并且增加和移除操作（任意一个操作）
+都需要在数组中插入和删除（两个步骤才能实现）。如果存储的数据在几百个以内，它们的性能差异并不明显，低于50%。
+
+（OK，那么光看Android官方的介绍我们就有初步结论了，大量的数据我们相对SparseArray会优先选择HashMap，
+如果数据在几百个这个数目，那么选择它们任意一个去实现区别不大，如果数量较少，就选择SparseArray去实现。
+其实如果我们理解了二分法，就很容易了SparseArray的实现原理，以及SparseArray和HashMap它们之间的区别了。）
+
+ * <p>Note that this container keeps its mappings in an array data structure,
+ * using a binary search to find keys.  The implementation is not intended to be appropriate for
+ * data structures
+ * that may contain large numbers of items.  It is generally slower than a traditional
+ * HashMap, since lookups require a binary search and adds and removes require inserting
+ * and deleting entries in the array.  For containers holding up to hundreds of items,
+ * the performance difference is not significant, less than 50%.</p>
+ *
+
+为了提高性能，这个容器包含了一个实现最优的方法：当移除keys后为了立刻使它的数组紧密，
+它会“遗留”已经被移除（标记了要删除）的条目（entry）所被标记的条目（entry）（还未被当作垃圾回收掉前）
+可以被相同的key复用，也会在垃圾回收机制当作所有要回收的条目的一员被回收，从而使存储的数组更紧密。
+（我们下面看源码就会发现remove()方法其实是调用delete()方法的。印证了上面这句话所说的这种优化方法。
+因为这样，能在每次移除元素后一直保持数组的数据结构是紧密不松散的。）
+
+ 垃圾回收的机制会在这些情况执行：数组需要扩充，或者映射表的大小被恢复，或者条目值被重新检索后恢复的时候。
+
+ * To help with performance, the container includes an optimization when removing
+ * keys: instead of compacting its array immediately, it leaves the removed entry marked
+ * as deleted.  The entry can then be re-used for the same key, or compacted later in
+ * a single garbage collection step of all removed entries.  This garbage collection will
+ * need to be performed at any time the array needs to be grown or the the map size or
+ * entry values are retrieved.
+
+当调用keyAt(int)去获取某个位置的key的键的值，或者调用valueAt(int)去获取某个位置的值时，
+可能是通过迭代容器中的元素去实现的。
+
+ *
+ * <p>It is possible to iterate over the items in this container using
+ * {@link #keyAt(int)} and {@link #valueAt(int)}. Iterating over the keys using
+ * <code>keyAt(int)</code> with ascending values of the index will return the
+ * keys in ascending order, or the values corresponding to the keys in ascending
+ * order in the case of <code>valueAt(int)<code>.</p>
+ */
+
+ sparsearray 总结：
+
+1、SparseArray的原理是二分检索法，也因此key的类型都是整型。
+
+2、（HashMap和SparseArray比较）当存储大量数据（起码上千个）的时候，优先选择HashMap。
+    如果只有几百个，用哪个区别不大。如果数量不多，优先选择SparseArray。
+
+3、SparseArray有自己的垃圾回收机制。（当数量不是很多的时候，这个不必关心。）
+
+4、 优点节省最高50%缓存;
+
+SparseArrayCompat()其实是一个map容器,它使用了一套算法优化了hashMap,可以节省至少50%的缓存.
+
+5、缺点但是有局限性只针对下面类型.
+key: Integer; value: object
+
+6、因此当HshMap()的key是Integer类型时推荐使用SparseArrayCompat(),用法与Map相似.
+
+作者：唠嗑008
+链接：https://www.jianshu.com/p/9a2d2bc65bdc
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

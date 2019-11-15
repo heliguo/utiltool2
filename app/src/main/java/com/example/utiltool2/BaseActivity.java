@@ -31,6 +31,7 @@ public class BaseActivity extends AppCompatActivity {
     WindowManager mWindowManager;
     WindowManager.LayoutParams mLayoutParams;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);

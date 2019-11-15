@@ -22,3 +22,168 @@ Test.java  ---> javac + AspectJ ----> Test.class
 }
 
 日志埋点、权限申请、网络监测、集中式登陆......
+
+
+
+/**
+ *1.任何view的getOverlay() 方法就可以获得该view的ViewOverlay，
+ *或者如果你是调用ViewGroup的getOverlay()方法获得的将是ViewGroupOverlay，
+ *ViewOverlay和ViewGroupOverlay是同一个概念
+ *<br/>
+ *2.ViewOverlay是4.3以后（api 18+）新增的一个类，它是view的最上面的一个透明的层，
+ *我们可以在这个层之上添加内容而不会影响到整个布局结构。
+ *这个层和我们的界面大小相同，可以理解成一个浮动在界面表面的二维空间。
+ *3.ViewOverlay中容纳的View或Drawable不会响应任何的触摸事件，
+ *因此ViewOverlay非常适合用于动画或制作一些不需要直接接受交互的浮层。
+ *4.需要注意的是，在调用 ViewGroupOverlay.add() 方法的时候，
+ *View会从原有的parent中被移除，并添加到目标ViewGroup的Overlay中。
+ */
+public class MainActivity extends Activity{
+
+    private Button btn_click = null;
+    private LinearLayout bodyLayout = null;
+    private LinearLayout llLayout = null;
+    private Button btn_click2 = null;
+    private LinearLayout bodyLayout2 = null;
+    private Button btn_click3 = null;
+    private LinearLayout bodyLayout3 = null;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_layout);
+        llLayout = (LinearLayout) findViewById(R.id.lllayout);
+        bodyLayout = (LinearLayout) findViewById(R.id.body);
+        btn_click = (Button) findViewById(R.id.btn_click);
+        btn_click.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                test1();
+            }
+        });
+
+        bodyLayout2 = (LinearLayout) findViewById(R.id.body2);
+        btn_click2 = (Button) findViewById(R.id.btn_click2);
+        btn_click2.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                test3();
+            }
+        });
+
+        bodyLayout3 = (LinearLayout) findViewById(R.id.body3);
+        btn_click3 = (Button) findViewById(R.id.btn_click3);
+        btn_click3.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    /**
+     * 测试button2从bodyLayout2顶部运动到bodyLayout3底部
+     */
+    private void test3(){
+        //这里限定了View执行动画的范围是bodyLayout的范围，超出这个范围的动画就看不到了
+        final ViewGroupOverlay viewGroupOverlay = llLayout.getOverlay();
+        //btn_click就是要执行动画的view,它的运动范围只能在bodyLayout的范围内
+        viewGroupOverlay.add(btn_click2);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(btn_click2, "translationY",
+        llLayout.getHeight()-bodyLayout.getBottom()-btn_click2.getHeight()).setDuration(2000);
+        anim.addListener(new AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+//              viewGroupOverlay.clear();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+        });
+        anim.start();
+    }
+    /**
+     * 测试button1
+     */
+    private void test2()
+    {
+        //这里限定了View执行动画的范围是bodyLayout的范围，超出这个范围的动画就看不到了
+        final ViewGroupOverlay viewGroupOverlay = bodyLayout.getOverlay();
+        //btn_click就是要执行动画的view,它的运动范围只能在bodyLayout的范围内
+        viewGroupOverlay.add(btn_click);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(btn_click, "translationY", llLayout.getBottom()-btn_click.getHeight()).setDuration(2000);
+        anim.addListener(new AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+//              viewGroupOverlay.clear();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+        });
+        anim.start();
+    }
+    /**
+     * 测试button1从llLayout顶部运动到底部
+     */
+    private void test1()
+    {
+        //llLayout在这里是整个界面的布局，可以到xml中查看
+        final ViewGroupOverlay viewGroupOverlay = llLayout.getOverlay();
+        //btn_click的运动可以看到它是显示这所有的布局的最上层的，也就是说，即使llLayout里包含三个LinearLayout子布局，但是
+        //这里将btn_click的运动范围设定为llLayout的范围，btn_click的动画可以在三个LinearLayout子布局之上运动的
+        viewGroupOverlay.add(btn_click);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(btn_click, "translationY", llLayout.getBottom()-btn_click.getHeight()).setDuration(2000);
+        anim.addListener(new AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+//              viewGroupOverlay.clear();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+        });
+        anim.start();
+    }
+}
