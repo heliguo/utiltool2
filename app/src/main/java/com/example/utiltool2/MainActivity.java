@@ -9,11 +9,13 @@ import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
 import com.example.utiltool2.annotation.NoNetworkShow;
 import com.example.utiltool2.glide.GlideActivity;
+import com.example.utiltool2.ipc.client.ClientActivity;
 import com.example.utiltool2.ui.ScreenActivity;
 import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
+import com.example.utiltool2.ui.slideview.ViewSlideActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,6 +31,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_glide).setOnClickListener(this);
         findViewById(R.id.btn_treeview).setOnClickListener(this);
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
+        findViewById(R.id.btn_ipc).setOnClickListener(this);
     }
 
     @Override
@@ -43,9 +46,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_cardview:
                 startActivity(new Intent(MainActivity.this, CardViewActivity.class));
                 break;
-//            case R.id.btn_slideview:
-//                startActivity(new Intent(MainActivity.this, ViewSlideActivity.class));
-//                break;
+            case R.id.btn_slideview:
+                startActivity(new Intent(MainActivity.this, ViewSlideActivity.class));
+                break;
 
             case R.id.btn_screen_draw:
                 startActivity(new Intent(MainActivity.this, ScreenActivity.class));
@@ -59,6 +62,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_recyclerview_adapter:
                 startActivity(new Intent(MainActivity.this, RecyclerAdapterActivity.class));
+                break;
+
+            case R.id.btn_ipc:
+                startActivity(new Intent(MainActivity.this, ClientActivity.class));
                 break;
         }
     }

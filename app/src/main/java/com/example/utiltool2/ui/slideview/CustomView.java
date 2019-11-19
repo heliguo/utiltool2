@@ -85,7 +85,7 @@ public class CustomView extends View {
                 break;
         }
 
-        return true;
+        return true;//消耗触摸事件
     }
 
     public void smoothScrollTo(int destX, int destY,int time) {

@@ -18,6 +18,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 
 import androidx.annotation.Nullable;
 
@@ -316,6 +319,9 @@ public class SceneDrawView extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        int touchSlop = ViewConfiguration.get(getContext()).getScaledDoubleTapSlop();
+
         int action = event.getAction();
         if (action != MotionEvent.ACTION_DOWN && action != MotionEvent.ACTION_UP) {
             return super.onTouchEvent(event);
@@ -459,4 +465,23 @@ public class SceneDrawView extends View {
         clearAnimation();
     }
 
+    /**
+     * true 表示当前view 为可编辑控件
+     * @return true
+     */
+//    @Override
+//    public boolean onCheckIsTextEditor() {
+//        return true;
+//    }
+
+
+    /**
+     * 接收输入
+     * @param outAttrs
+     * @return inputConnection
+     */
+    @Override
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+        return super.onCreateInputConnection(outAttrs);
+    }
 }
