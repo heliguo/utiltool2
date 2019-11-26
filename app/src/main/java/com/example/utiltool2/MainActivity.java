@@ -83,5 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @LogRecord("登陆操作")//日志埋点
     public void doLogin() {
 
+        int processors = Runtime.getRuntime().availableProcessors();
+
     }
 }
