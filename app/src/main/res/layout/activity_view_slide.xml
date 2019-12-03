@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.utiltool2.ui.customview.CustomView
+    <com.example.utiltool2.ui.slideview.CustomView
         android:id="@+id/customview"
         android:layout_width="80dp"
         android:layout_height="80dp"

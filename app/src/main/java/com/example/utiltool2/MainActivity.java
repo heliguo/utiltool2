@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.utiltool2.adapter.RecyclerAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
@@ -17,7 +18,11 @@ import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
 
+import java.util.Arrays;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
+
+    TimePickerView view ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

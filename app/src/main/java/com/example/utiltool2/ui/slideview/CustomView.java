@@ -55,17 +55,17 @@ public class CustomView extends View {
 //                    setLayoutParams(layoutParams);
 
                     //方法2：使用layout方法来重新放置它的位置，与点击事件不冲突效果好
-                    layout(getLeft() + offsetX, getTop() + offsetY,
-                            getRight() + offsetX, getBottom() + offsetY);
+//                    layout(getLeft() + offsetX, getTop() + offsetY,
+//                            getRight() + offsetX, getBottom() + offsetY);
 
                     //方法3：使用LayoutParams，与点击事件不冲突效果,好，同方法2
-//                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) getLayoutParams();
-//                    layoutParams.leftMargin = getLeft() + offsetX;
-//                    layoutParams.topMargin = getTop() + offsetY;
-//                    setLayoutParams(layoutParams);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) getLayoutParams();
+                    layoutParams.leftMargin = getLeft() + offsetX;
+                    layoutParams.topMargin = getTop() + offsetY;
+                    setLayoutParams(layoutParams);
 
                     //方法4：使用scrollBy，添加点击事件后移动完毕后会执行点击事件
-                    ((View)getParent()).scrollBy(-offsetX,-offsetY);
+//                    ((View)getParent()).scrollBy(-offsetX,-offsetY);
 
                     //方法5：使用offset，添加点击事件后移动完毕后会执行点击事件
 //                    offsetLeftAndRight(offsetX);//对left和right进行偏移
