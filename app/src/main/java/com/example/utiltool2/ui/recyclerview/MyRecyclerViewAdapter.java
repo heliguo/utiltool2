@@ -54,13 +54,19 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         /**
          * setTag
          */
-        holder.itemView.setTag(position);
-        holder.textView.setText(list.get(position));
+        if (position == list.size()){
+            holder.textView.setText("多的");
+        }else {
+            holder.itemView.setTag(position);
+            holder.textView.setText(list.get(position));
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.size()+1;
     }
 
     @Override
