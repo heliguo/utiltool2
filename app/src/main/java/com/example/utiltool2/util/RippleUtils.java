@@ -27,6 +27,7 @@ public class RippleUtils {
         return d;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static void setRipple(RippleDrawable tileBackground, View v) {
         mRipple = tileBackground;
         updateRippleSize(v);
@@ -42,8 +43,6 @@ public class RippleUtils {
             final int rad = (int) (v.getWidth() * .25f);
             Log.d("ripple", "updateRippleSize: rad=" + rad);
             mRipple.setHotspotBounds(cx - rad, cy - rad, cx + rad, cy + rad);
-        } else {
-            // TODO: 17-1-9
         }
     }
 
