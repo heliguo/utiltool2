@@ -2,6 +2,7 @@ package com.example.utiltool2.ui.slideview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class CustomView extends View {
 
                 lastX = x;
                 lastY = y;
-
+                Log.e("````````", "down ");
                 break;
 
             case MotionEvent.ACTION_MOVE:

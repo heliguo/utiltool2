@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--  题目类型、题目数量、当前题目-->
+        <include
+            android:id="@+id/exam_view_item_type"
+            layout="@layout/item_type" />
+
+        <!-- 问题、动态加载答案选项（个）-->
+        <include
+            android:id="@+id/exam_view_item_question"
+            layout="@layout/item_question" />
+
+        <!--  正确答案、答案解析-->
+        <include
+            android:id="@+id/exam_view_item_answer_keys"
+            layout="@layout/item_answer_keys" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -7,6 +7,14 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/btn_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toolbar"
+        android:textAllCaps="false"
+        android:onClick="toolbar"/>
+
+    <Button
         android:id="@+id/btn_ipc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,6 +76,14 @@
         android:layout_height="wrap_content"
         android:text="自定义view滑动与点击"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="viewpager滑动禁止"
+        android:textAllCaps="false"
+        android:onClick="onViewpager"/>
 
 
 </LinearLayout>

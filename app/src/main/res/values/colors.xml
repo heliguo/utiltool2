@@ -5,4 +5,12 @@
     <color name="colorAccent">#D81B60</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="textbgChoice">#ffFFDDAA</color>
+    <color name="textbgCorrect">#ff97E085</color>
+    <color name="textbgFalse">#ffFF8566</color>
+    <color name="textBrokeChoice">#ffFFBB55</color>
+    <color name="textChoice">#ff885200</color>
+    <color name="textCorrect">#ff1B8800</color>
+    <color name="textFalse">#ffCC0000</color>
 </resources>

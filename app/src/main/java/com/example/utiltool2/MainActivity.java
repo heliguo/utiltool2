@@ -9,6 +9,8 @@ import com.example.utiltool2.adapter.RecyclerAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
 import com.example.utiltool2.annotation.NoNetworkShow;
+import com.example.utiltool2.exam.ExamSystem;
+import com.example.utiltool2.examination.TabLayoutActivity;
 import com.example.utiltool2.glide.GlideActivity;
 import com.example.utiltool2.ipc.client.ClientActivity;
 import com.example.utiltool2.ui.ScreenActivity;
@@ -18,11 +20,9 @@ import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
 
-import java.util.Arrays;
-
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    TimePickerView view ;
+    TimePickerView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,5 +90,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         int processors = Runtime.getRuntime().availableProcessors();
 
+    }
+
+    public void onViewpager(View view) {
+        startActivity(new Intent(this, TabLayoutActivity.class));
+    }
+
+    public void toolbar(View view) {
+        startActivity(new Intent(this, ExamSystem.class));
     }
 }
