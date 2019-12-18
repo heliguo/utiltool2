@@ -83,11 +83,6 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                     barLayout.setBtnText(position < questionNumber - 1 ? "下一题" : "确定");
                 }
 
-                if (sparseBooleanArray.get(position)) {
-                    isCurrentRight = true;
-                } else {
-                    isCurrentRight = false;
-                }
             }
 
             @Override
@@ -99,13 +94,13 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
 
         examViewPager.setPagerListener(new PagerListener() {
             @Override
-            public void scroll(float offsetX, float offsetY) {//右滑
-                if (offsetX < -25f && Math.abs(offsetX) > Math.abs(offsetY)) {
+            public void scroll(float offsetX, float offsetY) {
+                if (offsetX < 0) {//右滑
                     if (sparseBooleanArray.get(examViewPager.getCurrentItem()))
                         examViewPager.setCurrentItem(examViewPager.getCurrentItem() == questionNumber - 1 ? examViewPager.getCurrentItem() : examViewPager.getCurrentItem() + 1, true);
                     Log.e(TAG, "scroll: < 0  ```` " + sparseBooleanArray.get(examViewPager.getCurrentItem()));
                 }
-                if (offsetX > 25f && Math.abs(offsetX) > Math.abs(offsetY)) {//左滑
+                if (offsetX > 0) {//左滑
                     examViewPager.setCurrentItem(examViewPager.getCurrentItem() == 0 ? 0 : examViewPager.getCurrentItem() - 1, true);
                     Log.e(TAG, "scroll: > 0");
                 }
@@ -143,7 +138,7 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
             ScrollView layout = (ScrollView) getLayoutInflater().inflate(R.layout.exam_view_item, null);
             //题目类型
             itemTypeTv = layout.findViewById(R.id.item_type);
-            itemTypeTv.setText("判断题");
+            itemTypeTv.setText("多选题");
 
             //当前题目
             currentNumTv = layout.findViewById(R.id.item_type_current_num);
@@ -204,9 +199,6 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
     //key：当前题目，value：确定哪个选项被选择。 click 事件
     private SparseArray<SparseBooleanArray> clickArray = new SparseArray<>();
 
-    //当前答题正确标志，用于切换下一题
-    private boolean isCurrentRight = false;
-
 
     private int totalRight;
     private int totalFalse;
@@ -218,16 +210,16 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
         if (v.getId() == R.id.toolbar_right_btn) {
 
             //只有答错才会进入
-            if (isCurrentRight || sparseBooleanArray.get(examViewPager.getCurrentItem())) {
+            if (sparseBooleanArray.get(examViewPager.getCurrentItem())) {
                 //进入下一题或者提交
                 if (examViewPager.getCurrentItem() < questionNumber - 1) {
                     examViewPager.setCurrentItem(examViewPager.getCurrentItem() + 1);
 
                 } else {
                     //提交操作
+//                    barLayout.setBtnText( "确定");
                     Log.e(TAG, "答对" + totalRight + ";答错" + totalFalse);
                 }
-                isCurrentRight = false;
                 return;
             }
 
@@ -251,6 +243,7 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                                 if (examViewPager.getCurrentItem() < questionNumber - 1) {
                                     examViewPager.setCurrentItem(examViewPager.getCurrentItem() + 1);
                                 } else {
+                                    barLayout.setBtnText( "完成");
                                     Log.e(TAG, "答对" + totalRight + ";答错" + totalFalse);
                                 }
 
@@ -263,7 +256,6 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                                 sparseBooleanArray.put(examViewPager.getCurrentItem(), true);
                                 //显示答案解析，使用标志位，再次点击进入下一题
                                 cardViewSparseArray.get(examViewPager.getCurrentItem()).setVisibility(View.VISIBLE);
-                                isCurrentRight = true;
                                 if (examViewPager.getCurrentItem() == questionNumber - 1) {
                                     barLayout.setBtnText("完成");
                                 }
@@ -274,7 +266,6 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                     }
                     if (totalCount == booleanArray.size()) {
                         toastShow("请选择答案!");
-                        isCurrentRight = false;
                         textViewSetClickable(textViewSparseArray);
                         return;
                     }
@@ -297,7 +288,6 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                     }
                     if (totalCount == booleanArray.size()) {
                         toastShow("请选择答案!");
-                        isCurrentRight = false;
                         textViewSetClickable(textViewSparseArray);
                         return;
                     }
@@ -314,6 +304,7 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                             examViewPager.setCurrentItem(examViewPager.getCurrentItem() + 1);
 
                         } else {
+                            barLayout.setBtnText( "完成");
                             Log.e(TAG, "答对" + totalRight + ";答错" + totalFalse);
                         }
                         textViewSetUnClickable(textViewSparseArray);
@@ -331,7 +322,6 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                             barLayout.setBtnText("完成");
                         }
                         cardViewSparseArray.get(examViewPager.getCurrentItem()).setVisibility(View.VISIBLE);
-                        isCurrentRight = true;
                         textViewSetUnClickable(textViewSparseArray);
                     }
 

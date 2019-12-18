@@ -51,11 +51,11 @@ public class ExamViewPager extends ViewPager {
                 float offsetX = currentX - lastX;
                 float offsetY = currentY - lastY;
 
-                if (once && offsetX < -25f) {
+                if (once && offsetX < -25f && Math.abs(offsetX) > Math.abs(offsetY)) {
                     pagerListener.scroll(offsetX, offsetY);
                     once = false;
                 }
-                if (once && offsetX > 25f) {
+                if (once && offsetX > 25f && Math.abs(offsetX) > Math.abs(offsetY)) {
                     pagerListener.scroll(offsetX, offsetY);
                     once = false;
                 }
