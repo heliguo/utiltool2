@@ -44,7 +44,18 @@
         </activity>
         <activity
             android:name=".examination.TabLayoutActivity"
-            android:theme="@style/Theme.imgFullScreen">
+            android:theme="@style/Theme.imgFullScreen" />
+        <activity
+            android:name=".signature.SignatureActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionbar" />
+
+        <activity android:name=".signature.PenActivity">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <service android:name=".ipc.server.RemoteService" />

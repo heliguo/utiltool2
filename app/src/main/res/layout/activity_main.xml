@@ -1,89 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_toolbar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toolbar"
-        android:textAllCaps="false"
-        android:onClick="toolbar"/>
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_ipc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="IPC"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_signature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="signature"
+            android:text="sign"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_recyclerview_adapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RecyclerView_Adapter"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toolbar"
+            android:text="toolbar"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_treeview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TreeView"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_ipc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IPC"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_glide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="自定义Glide"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_recyclerview_adapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RecyclerView_Adapter"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_screen_draw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="自定义view"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_treeview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TreeView"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_recyclerview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recyclerview"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_glide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义Glide"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_screen_draw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义view"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_cardview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CardView"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_recyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recyclerview"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_slideview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="自定义view滑动与点击"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notification"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_viewpager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="viewpager滑动禁止"
-        android:textAllCaps="false"
-        android:onClick="onViewpager"/>
+        <Button
+            android:id="@+id/btn_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CardView"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_slideview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义view滑动与点击"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onViewpager"
+            android:text="viewpager滑动禁止"
+            android:textAllCaps="false" />
 
 
-</LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

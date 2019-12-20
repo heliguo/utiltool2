@@ -309,6 +309,7 @@ public class SceneDrawView extends View {
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
         paint.setTextSize(textSize);
+//        paint.setXfermode();
         canvas.drawText(text1, (float) (screenWidth * left1Left) + 10 + offset, (float) (screenHeight * left1Top) - 120, paint);
         canvas.drawText(text2, (float) (screenWidth * (left2Left - brakeLength)) - 10 + offset, (float) (screenHeight * left2Top) + 115, paint);
         canvas.drawText(text3, (float) (screenWidth * (right1Left - brakeLength)) - 10 + offset, (float) (screenHeight * right1Top) - 120, paint);

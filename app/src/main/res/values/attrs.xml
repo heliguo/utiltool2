@@ -3,16 +3,16 @@
 
     <declare-styleable name="ExamAppBarLayout">
         <attr name="leftImageColor" format="color" />
-<!--        <attr name="leftImageSize" format="dimension"/>-->
+        <!--        <attr name="leftImageSize" format="dimension"/>-->
         <attr name="titleColor" format="color" />
         <attr name="titleTextSize" format="dimension" />
         <attr name="titleText" format="string" />
         <attr name="toorbarColor" format="color" />
 
-<!--        <attr name="rightBtnSize" format="dimension"/>-->
-<!--        <attr name="rightBtnColor" format="dimension"/>-->
-<!--        <attr name="rightBtnTextSize" format="dimension"/>-->
-<!--        <attr name="rightBtnTextColor" format="dimension"/>-->
+        <!--        <attr name="rightBtnSize" format="dimension"/>-->
+        <!--        <attr name="rightBtnColor" format="dimension"/>-->
+        <!--        <attr name="rightBtnTextSize" format="dimension"/>-->
+        <!--        <attr name="rightBtnTextColor" format="dimension"/>-->
 
     </declare-styleable>
 
@@ -20,6 +20,14 @@
         <attr name="contentScrim" format="color" />
         <attr name="tabIndicatorColor" format="color" />
         <attr name="tabTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SignaturePad">
+        <attr name="penMinWidth" format="dimension" />
+        <attr name="penMaxWidth" format="dimension" />
+        <attr name="penColor" format="color" />
+        <attr name="velocityFilterWeight" format="float" />
+        <attr name="clearOnDoubleClick" format="boolean" />
     </declare-styleable>
 
 </resources>

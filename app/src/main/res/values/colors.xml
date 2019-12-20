@@ -13,4 +13,5 @@
     <color name="textChoice">#ff885200</color>
     <color name="textCorrect">#ff1B8800</color>
     <color name="textFalse">#ffCC0000</color>
+    <color name="grey">#ffEEEEEE</color>
 </resources>

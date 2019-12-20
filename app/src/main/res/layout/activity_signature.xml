@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/signature_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:contentInsetStart="0dp">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="rotateScreen"
+                    android:text="旋转屏幕" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="eraser"
+                    android:text="橡皮擦" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="adjustPaint"
+                    android:text="画笔" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="clearAll"
+                    android:text="全部清除" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="clearPreStep"
+                    android:text="清除上一步" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="signSave"
+                    android:text="保存" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.example.utiltool2.signature.SignaturePad
+        android:id="@+id/signature_sign"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:penColor="@android:color/black" />
+
+</LinearLayout>

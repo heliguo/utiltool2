@@ -35,7 +35,6 @@ public class ExamViewPager extends ViewPager {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
-
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
@@ -52,11 +51,13 @@ public class ExamViewPager extends ViewPager {
                 float offsetY = currentY - lastY;
 
                 if (once && offsetX < -25f && Math.abs(offsetX) > Math.abs(offsetY)) {
-                    pagerListener.scroll(offsetX, offsetY);
+                    if (pagerListener != null)
+                        pagerListener.scroll(offsetX, offsetY);
                     once = false;
                 }
                 if (once && offsetX > 25f && Math.abs(offsetX) > Math.abs(offsetY)) {
-                    pagerListener.scroll(offsetX, offsetY);
+                    if (pagerListener != null)
+                        pagerListener.scroll(offsetX, offsetY);
                     once = false;
                 }
 
