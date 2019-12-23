@@ -60,14 +60,6 @@
                     android:onClick="clearAll"
                     android:text="全部清除" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="clearPreStep"
-                    android:text="清除上一步" />
 
                 <TextView
                     android:layout_width="wrap_content"

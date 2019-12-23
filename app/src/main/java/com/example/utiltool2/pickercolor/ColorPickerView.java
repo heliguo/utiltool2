@@ -216,7 +216,8 @@ public class ColorPickerView extends LinearLayout implements ColorObservable {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
-            iColorListener.color(getColor());
+            if (iColorListener != null)
+                iColorListener.color(getColor());
         }
         return super.onInterceptTouchEvent(ev);
     }

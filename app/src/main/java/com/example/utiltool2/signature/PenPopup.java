@@ -100,7 +100,7 @@ public class PenPopup implements View.OnClickListener {
         popupWindow = new PopupWindow(view, 1000,
                 1000);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        popupWindow.setOutsideTouchable(true);
+        popupWindow.setOutsideTouchable(false);
 
         if (Build.VERSION.SDK_INT >= 21) {
             popupWindow.setElevation(10.0f);

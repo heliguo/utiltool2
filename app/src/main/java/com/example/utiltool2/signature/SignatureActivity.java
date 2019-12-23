@@ -2,7 +2,6 @@ package com.example.utiltool2.signature;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -94,6 +93,7 @@ public class SignatureActivity extends BaseActivity {
             }
         });
         penPopup.show(view);
+
     }
 
     //橡皮擦
