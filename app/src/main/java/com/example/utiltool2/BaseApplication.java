@@ -2,10 +2,14 @@ package com.example.utiltool2;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import timemonitor.TimeMonitorConfig;
+import timemonitor.TimeMonitorManager;
 
 /**
  * author:lgh on 2019-11-06 08:54
@@ -13,8 +17,17 @@ import androidx.annotation.Nullable;
 public class BaseApplication extends Application {
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        TimeMonitorManager.getInstance().resetTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START);
+
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START)
+                .recordingTimeTag("Application-onCreate");
 
         //面向切面编程
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

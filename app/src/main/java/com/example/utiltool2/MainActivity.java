@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.core.app.ActivityCompat;
 
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.bumptech.glide.Glide;
 import com.example.utiltool2.adapter.RecyclerAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
@@ -20,11 +21,15 @@ import com.example.utiltool2.glide.GlideActivity;
 import com.example.utiltool2.ipc.client.ClientActivity;
 import com.example.utiltool2.signature.SignatureActivity;
 import com.example.utiltool2.ui.ScreenActivity;
+import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
+
+import timemonitor.TimeMonitorConfig;
+import timemonitor.TimeMonitorManager;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -36,6 +41,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).
+                recordingTimeTag("MainActivity-onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyStoragePermissions(this);//权限申请
@@ -48,6 +55,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_treeview).setOnClickListener(this);
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
         findViewById(R.id.btn_ipc).setOnClickListener(this);
+        SelfImageView iv = findViewById(R.id.self_iv);
+        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
+        iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START)
+                .recordingTimeTag("MainActivity-onCreate-Over");
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).
+                end("MainActivity-onStart", false);
+
     }
 
     private void verifyStoragePermissions(Activity activity) {

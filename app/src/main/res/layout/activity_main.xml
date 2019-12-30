@@ -99,6 +99,11 @@
             android:textAllCaps="false" />
 
 
+        <com.example.utiltool2.ui.SelfImageView
+            android:id="@+id/self_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
     </LinearLayout>
 

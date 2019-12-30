@@ -143,16 +143,6 @@ public class SceneDrawView extends View {
         requestLayout();
     }
 
-    //组件大小发生变化时的回调
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (oldh != h) {
-            screenWidth = w;
-            screenHeight = h;
-            isShowBG = true;//屏幕尺寸改变缩放比例改变需要重新解码
-        }
-    }
 
     //3、测量Imageview缩放比例
     @Override
@@ -171,6 +161,16 @@ public class SceneDrawView extends View {
         mScaleY = mViewHeight / (float) mImageHeight;//上下缩放比例
     }
 
+    //组件大小发生变化时的回调
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if (oldh != h) {
+            screenWidth = w;
+            screenHeight = h;
+            isShowBG = true;//屏幕尺寸改变缩放比例改变需要重新解码
+        }
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
