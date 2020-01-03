@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
         findViewById(R.id.btn_ipc).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
-        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
+//        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
         iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
         TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START)
                 .recordingTimeTag("MainActivity-onCreate-Over");
