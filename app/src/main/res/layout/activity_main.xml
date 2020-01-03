@@ -12,6 +12,13 @@
         tools:context=".MainActivity">
 
         <Button
+            android:id="@+id/btn_choose_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择图片"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btn_signature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

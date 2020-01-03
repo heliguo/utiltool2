@@ -5,9 +5,22 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--电话-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--摄像头-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--读日历-->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <!--传感器-->
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <!--定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".BaseApplication"
+        android:name="com.example.utiltool2.BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,50 +29,53 @@
         android:theme="@style/AppThemeWelcome"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.recyclerview.RecyclerViewActivity"
+            android:name="com.example.utiltool2.ui.recyclerview.RecyclerViewActivity"
             android:theme="@style/AppTheme">
 
         </activity>
-        <activity android:name=".ui.notification.NotificationActivity" />
-        <activity android:name=".ui.cardview.CardViewActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.utiltool2.ui.notification.NotificationActivity" />
+        <activity android:name="com.example.utiltool2.ui.cardview.CardViewActivity" />
+        <activity android:name="com.example.utiltool2.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseActivity">
+        <activity android:name="com.example.utiltool2.BaseActivity">
 
         </activity>
-        <activity android:name=".ui.ScreenActivity" />
-        <activity android:name=".ui.slideview.ViewSlideActivity" />
-        <activity android:name=".glide.GlideActivity" />
-        <activity android:name=".ui.TreeViewActivity" />
-        <activity android:name=".adapter.RecyclerAdapterActivity" />
-        <activity android:name=".ipc.client.ClientActivity" />
+        <activity android:name="com.example.utiltool2.ui.ScreenActivity" />
+        <activity android:name="com.example.utiltool2.ui.slideview.ViewSlideActivity" />
+        <activity android:name="com.example.utiltool2.glide.GlideActivity" />
+        <activity android:name="com.example.utiltool2.ui.TreeViewActivity" />
+        <activity android:name="com.example.utiltool2.adapter.RecyclerAdapterActivity" />
+        <activity android:name="com.example.utiltool2.ipc.client.ClientActivity" />
         <activity
-            android:name=".exam.ExamSystem"
+            android:name="com.example.utiltool2.exam.ExamSystem"
             android:theme="@style/AppThemeNoActionbar">
 
         </activity>
         <activity
-            android:name=".examination.TabLayoutActivity"
+            android:name="com.example.utiltool2.examination.TabLayoutActivity"
             android:theme="@style/Theme.imgFullScreen" />
         <activity
-            android:name=".signature.SignatureActivity"
+            android:name="com.example.utiltool2.signature.SignatureActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionbar" />
 
-        <activity android:name=".signature.PenActivity">
+        <activity android:name="com.example.utiltool2.signature.PenActivity">
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
 
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
+        <activity
+            android:name="com.example.utiltool2.aspect.PermissionAspectActivity"
+            android:theme="@style/translucent" />
 
-        <service android:name=".ipc.server.RemoteService" />
+        <service android:name="com.example.utiltool2.ipc.server.RemoteService" />
 
     </application>
 

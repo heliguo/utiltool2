@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 public class NetworkCheckApspect {
 
     //进行一个切点
-    @Pointcut("execution(@com.example.utiltool2.annotation.NetworkCheck * *(...) )")
+    @Pointcut("execution(@com.example.utiltool2.annotation.NetworkCheck * *(..))")
     public void pointActionMethod() {
     }
 
@@ -45,12 +45,12 @@ public class NetworkCheckApspect {
             throw new IllegalAccessException("context is null");
         }
         //判断是否有网络
-        if (NetworkUtils.isNetworkAvailable(context)){
+        if (NetworkUtils.isNetworkAvailable(context)) {
             //网络正常，保证方法执行
             proceedingJoinPoint.proceed();
-        }else {
+        } else {
             //操作1
-            Toast.makeText(context,"",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
             //操作2 @NoNetworkShow
             Class<?> aClass = object.getClass();
             Method[] declaredMethods = aClass.getDeclaredMethods();
@@ -58,7 +58,7 @@ public class NetworkCheckApspect {
                 declaredMethod.setAccessible(true);//获取private 方法
                 //符合@NoNetworkShow注解
                 boolean annotationPresent = declaredMethod.isAnnotationPresent(NoNetworkShow.class);
-                if (annotationPresent){
+                if (annotationPresent) {
                     declaredMethod.invoke(object);
                 }
             }

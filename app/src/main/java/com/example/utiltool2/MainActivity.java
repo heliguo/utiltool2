@@ -5,12 +5,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.bumptech.glide.Glide;
 import com.example.utiltool2.adapter.RecyclerAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
@@ -19,6 +19,9 @@ import com.example.utiltool2.exam.ExamSystem;
 import com.example.utiltool2.examination.TabLayoutActivity;
 import com.example.utiltool2.glide.GlideActivity;
 import com.example.utiltool2.ipc.client.ClientActivity;
+import com.example.utiltool2.annotation.PermissionDenied;
+import com.example.utiltool2.annotation.PermissionDeniedForever;
+import com.example.utiltool2.annotation.PermissionNeed;
 import com.example.utiltool2.signature.SignatureActivity;
 import com.example.utiltool2.ui.ScreenActivity;
 import com.example.utiltool2.ui.SelfImageView;
@@ -45,7 +48,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 recordingTimeTag("MainActivity-onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        verifyStoragePermissions(this);//权限申请
+//        verifyStoragePermissions(this);//权限申请
         findViewById(R.id.btn_recyclerview).setOnClickListener(this);
         findViewById(R.id.btn_notification).setOnClickListener(this);
         findViewById(R.id.btn_cardview).setOnClickListener(this);
@@ -55,6 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_treeview).setOnClickListener(this);
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
         findViewById(R.id.btn_ipc).setOnClickListener(this);
+        findViewById(R.id.btn_choose_picture).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
 //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
         iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
@@ -118,6 +122,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_ipc:
                 startActivity(new Intent(MainActivity.this, ClientActivity.class));
                 break;
+            case R.id.btn_choose_picture:
+                testPermission();
+                break;
+
         }
     }
 
@@ -148,5 +156,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public void signature(View view) {
         startActivity(new Intent(this, SignatureActivity.class));
+    }
+
+
+    @PermissionNeed(
+            permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_CALENDAR,
+            Manifest.permission.CAMERA, Manifest.permission.BODY_SENSORS}, requestCode = 1)
+    private void testPermission() {
+        Log.e("Permission", "Activity:权限获取成功: ");
+    }
+
+    @PermissionDenied
+    private void permissionDenied(int requestCode) {
+        switch (requestCode) {
+            case 1:
+                Log.e("Permission", "Activity:权限被拒绝: ");
+                break;
+            default:
+                break;
+        }
+    }
+
+    @PermissionDeniedForever
+    private void permissionDeniedForever(int requestCode) {
+        switch (requestCode) {
+            case 1:
+                Log.e("Permission", "Activity:权限被永久拒绝: ");
+                break;
+            default:
+                break;
+        }
     }
 }

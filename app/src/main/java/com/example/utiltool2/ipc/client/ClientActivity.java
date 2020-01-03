@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.R;
 import com.example.utiltool2.ipc.Book;

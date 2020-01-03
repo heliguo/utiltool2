@@ -21,7 +21,7 @@ public class LogAspect {
 
     private final String TAG = LogAspect.class.getSimpleName();
 
-    @Pointcut("execution(@com.example.utiltool2.annotation.LogRecord * *(...)) && @annotation(log)")
+    @Pointcut("execution(@com.example.utiltool2.annotation.LogRecord * *(..)) && @annotation(log)")
     public void pointAnctionMethod(LogRecord log) {
 
     }

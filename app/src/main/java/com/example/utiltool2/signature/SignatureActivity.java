@@ -1,5 +1,6 @@
 package com.example.utiltool2.signature;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 
 import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.R;
+import com.example.utiltool2.annotation.PermissionNeed;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -118,6 +120,7 @@ public class SignatureActivity extends BaseActivity {
     }
 
     //保存
+    @PermissionNeed(permissions = {Manifest.permission.ACCESS_FINE_LOCATION}, requestCode = 17)
     private void createDialogSave() {
         if (isEmpty) {
             Toast.makeText(this, "您还没有签名", Toast.LENGTH_SHORT).show();
