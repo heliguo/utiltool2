@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class PermissionUtil {
 
@@ -73,11 +74,12 @@ public class PermissionUtil {
      */
     public static boolean verifyPermissions(int... grantResults) {
         if (grantResults.length == 0) return false;
-        for (int result : grantResults) {
-            if (result != PackageManager.PERMISSION_GRANTED) {
+        for (int grantResult : grantResults) {
+            if (grantResult != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -88,6 +90,8 @@ public class PermissionUtil {
      * @param permissions 权限list
      * @return 如果某个权限需要提示则返回true
      */
+
+
     public static boolean shouldShowRequestPermissionRationale(Activity activity, String... permissions) {
         for (String permission : permissions) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
