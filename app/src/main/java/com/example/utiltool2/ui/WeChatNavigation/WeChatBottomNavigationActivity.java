@@ -58,6 +58,7 @@ public class WeChatBottomNavigationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wechat_bottom_navigation);
         ButterKnife.bind(this);
+
         mTabViews.add(mTabWeixin);
         mTabViews.add(mTabContact);
         mTabViews.add(mTabFind);
@@ -121,6 +122,7 @@ public class WeChatBottomNavigationActivity extends BaseActivity {
     private class MyPagerAdapter extends FragmentPagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
+
         }
 
         @Override
