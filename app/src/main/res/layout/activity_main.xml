@@ -12,6 +12,21 @@
         tools:context=".MainActivity">
 
         <Button
+            android:id="@+id/btn_WeChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信导航栏"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_decorator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="decorator"
+            android:text="装饰者模式"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btn_choose_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,8 +124,7 @@
         <com.example.utiltool2.ui.SelfImageView
             android:id="@+id/self_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

@@ -12,8 +12,6 @@ import android.nfc.tech.NfcV;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.R;
 

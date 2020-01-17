@@ -20,6 +20,7 @@ import com.example.utiltool2.annotation.NoNetworkShow;
 import com.example.utiltool2.annotation.PermissionDenied;
 import com.example.utiltool2.annotation.PermissionDeniedForever;
 import com.example.utiltool2.annotation.PermissionNeed;
+import com.example.utiltool2.decorator.DecoratorActivity;
 import com.example.utiltool2.exam.ExamSystem;
 import com.example.utiltool2.examination.TabLayoutActivity;
 import com.example.utiltool2.glide.GlideActivity;
@@ -29,6 +30,7 @@ import com.example.utiltool2.signature.SignatureActivity;
 import com.example.utiltool2.ui.ScreenActivity;
 import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
+import com.example.utiltool2.ui.WeChatNavigation.WeChatBottomNavigationActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
@@ -62,6 +64,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
         findViewById(R.id.btn_ipc).setOnClickListener(this);
         findViewById(R.id.btn_choose_picture).setOnClickListener(this);
+        findViewById(R.id.btn_WeChat).setOnClickListener(this);
+//        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
 //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
         iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
@@ -127,6 +131,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_choose_picture:
                 testPermission();
+                break;
+            case R.id.btn_WeChat:
+                weChat(v);
                 break;
 
         }
@@ -201,5 +208,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    public void decorator(View view) {
+        startActivity(new Intent(this, DecoratorActivity.class));
+    }
+
+    public void weChat(View view) {
+        startActivity(new Intent(this, WeChatBottomNavigationActivity.class));
+
     }
 }
