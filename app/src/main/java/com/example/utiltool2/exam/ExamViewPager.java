@@ -17,19 +17,8 @@ import java.util.Map;
  */
 public class ExamViewPager extends ViewPager {
 
-    private Map<Integer, View> viewMap;
-    private View leftView;
-    private View rightView;
-
     private float lastX;
     private float lastY;
-
-    //变化的梯度
-    private float mTrans;
-    //缩放的值
-    private float mScale;
-    //缩放的最小值，从0.5 到 1
-    private static final float MIN_SCALE = 0.5f;
 
     private PagerListener pagerListener;
 
@@ -39,7 +28,6 @@ public class ExamViewPager extends ViewPager {
 
     public ExamViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        viewMap = new HashMap<>();
     }
 
     public void setPagerListener(PagerListener pagerListener) {
@@ -76,7 +64,6 @@ public class ExamViewPager extends ViewPager {
                         pagerListener.scroll(offsetX, offsetY);
                     once = false;
                 }
-
                 lastX = currentX;
                 lastY = currentY;
                 break;
@@ -84,47 +71,8 @@ public class ExamViewPager extends ViewPager {
             case MotionEvent.ACTION_UP:
                 break;
         }
-
-        return true;
+        return false;
     }
 
-    public void setViewForPosition(View view, int position) {
-        viewMap.put(position, view);
-    }
 
-    public void removeViewFromPosition(int position) {
-        viewMap.remove(position);
-    }
-
-    @Override
-    protected void onPageScrolled(int position, float offset, int offsetPixels) {
-        leftView = viewMap.get(position);
-        rightView = viewMap.get(position + 1);
-        animView(leftView, rightView, offset, offsetPixels);
-        super.onPageScrolled(position, offset, offsetPixels);
-    }
-
-    private void animView(View leftView, View rightView, float offset, int offsetPixels) {
-        //从0页到1页， offset： 0-1
-        //从0 逐渐变到1
-        mScale = (1 - MIN_SCALE) * offset + MIN_SCALE;
-        mTrans = -getWidth() - getPageMargin() + offsetPixels;
-        if (rightView != null) {
-            rightView.setScaleX(mScale);
-            rightView.setScaleY(mScale);
-            rightView.setTranslationX(mTrans);
-        }
-        if (leftView != null) {
-            //让其保持在顶部绘制
-            leftView.bringToFront();
-
-        }
-
-    }
-
-    @Override
-    public void setCurrentItem(int item) {
-        super.setCurrentItem(item);
-
-    }
 }

@@ -66,6 +66,10 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
         initView();
 
         adapter = new ExamViewPagerAdapter(viewList);
+
+        ViewPagerScroller scroller = new ViewPagerScroller(this);
+        scroller.setScrollDuration(1000);
+        scroller.initViewPagerScroll(examViewPager);
         examViewPager.setAdapter(adapter);
 
         examViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -91,34 +95,23 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
             }
 
         });
+        examViewPager.setPageTransformer(true,new DepthPageTransformer());
 
-        adapter.setLoadListener(new ExamViewPagerAdapter.ViewLoadListener() {
+        examViewPager.setPagerListener(new PagerListener() {
             @Override
-            public void addView(View view, int position) {
-                examViewPager.setViewForPosition(view, position);
-            }
+            public void scroll(float offsetX, float offsetY) {
+                if (offsetX < 0) {//右滑
+                    if (sparseBooleanArray.get(examViewPager.getCurrentItem()))
+                        setCurrenView(true);
+                    Log.e(TAG, "scroll: < 0  ```` " + sparseBooleanArray.get(examViewPager.getCurrentItem()));
+                }
+                if (offsetX > 0) {//左滑
+                    setCurrenView(false);
+                    Log.e(TAG, "scroll: > 0");
+                }
 
-            @Override
-            public void removeView(int position) {
-                examViewPager.removeViewFromPosition(position);
             }
         });
-
-//        examViewPager.setPagerListener(new PagerListener() {
-//            @Override
-//            public void scroll(float offsetX, float offsetY) {
-//                if (offsetX < 0) {//右滑
-//                    if (sparseBooleanArray.get(examViewPager.getCurrentItem()))
-//                        setCurrenView(true);
-//                    Log.e(TAG, "scroll: < 0  ```` " + sparseBooleanArray.get(examViewPager.getCurrentItem()));
-//                }
-//                if (offsetX > 0) {//左滑
-//                    setCurrenView(false);
-//                    Log.e(TAG, "scroll: > 0");
-//                }
-//
-//            }
-//        });
 
     }
 
