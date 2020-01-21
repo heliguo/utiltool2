@@ -92,6 +92,7 @@
         </activity>
         <activity android:name=".decorator.DecoratorActivity" />
         <activity android:name=".ui.WeChatNavigation.WeChatBottomNavigationActivity" />
+        <activity android:name=".ui.huawei_loading.LoadingActivity" />
 
         <service android:name="com.example.utiltool2.ipc.server.RemoteService" />
 

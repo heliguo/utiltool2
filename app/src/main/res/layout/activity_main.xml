@@ -12,6 +12,14 @@
         tools:context=".MainActivity">
 
         <Button
+            android:id="@+id/btn_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading"
+            android:textAllCaps="false"
+            android:onClick="loading"/>
+
+        <Button
             android:id="@+id/btn_WeChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -32,6 +32,7 @@ import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.WeChatNavigation.WeChatBottomNavigationActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
+import com.example.utiltool2.ui.huawei_loading.LoadingDialog;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
@@ -216,6 +217,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public void weChat(View view) {
         startActivity(new Intent(this, WeChatBottomNavigationActivity.class));
+
+    }
+
+    public void loading(View view) {
+//        startActivity(new Intent(this, LoadingActivity.class));
+        LoadingDialog loadingDialog = new LoadingDialog(this);
+        loadingDialog.setBackgroundColor(R.color.transparent);
+        loadingDialog.show();
 
     }
 }
