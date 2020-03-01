@@ -11,7 +11,8 @@ import android.view.View;
 import androidx.core.app.ActivityCompat;
 
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.example.utiltool2.adapter.RecyclerAdapterActivity;
+import com.example.utiltool2.adapter.BaseAdapterActivity;
+import com.example.utiltool2.adapter.RViewAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
 import com.example.utiltool2.annotation.NoNetworkShow;
@@ -116,7 +117,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
             case R.id.btn_recyclerview_adapter:
-                startActivity(new Intent(MainActivity.this, RecyclerAdapterActivity.class));
+                startActivity(new Intent(MainActivity.this, RViewAdapterActivity.class));
                 break;
 
             case R.id.btn_ipc:

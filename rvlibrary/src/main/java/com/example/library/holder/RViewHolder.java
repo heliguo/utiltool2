@@ -19,7 +19,7 @@ public class RViewHolder extends RecyclerView.ViewHolder {
     //提供当前view
     private View mConvertView;
 
-    public RViewHolder(@NonNull View itemView) {
+     private RViewHolder(@NonNull View itemView) {
         super(itemView);
         mConvertView = itemView;
         mViews = new SparseArray<>();
@@ -36,6 +36,7 @@ public class RViewHolder extends RecyclerView.ViewHolder {
         View view = mViews.get(viewId);
         if (view == null) {
             view = mConvertView.findViewById(viewId);
+            //key:R.id.xxx  value:textview/edittext/...
             mViews.put(viewId, view);
         }
         return (T) view;
