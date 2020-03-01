@@ -1,0 +1,6 @@
+ArgbEvaluator.java  计算颜色渐变值的类
+
+
+ 自定义 view - 自定义属性：
+ https://www.jianshu.com/p/c44043f18d26
+ https://blog.csdn.net/bobo8945510/article/details/53197727

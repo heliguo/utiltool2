@@ -2,6 +2,8 @@ package com.example.utiltool2;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,18 +18,22 @@ import com.example.utiltool2.adapter.RViewAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
 import com.example.utiltool2.annotation.NoNetworkShow;
+import com.example.utiltool2.annotation.PermissionDenied;
+import com.example.utiltool2.annotation.PermissionDeniedForever;
+import com.example.utiltool2.annotation.PermissionNeed;
+import com.example.utiltool2.decorator.DecoratorActivity;
 import com.example.utiltool2.exam.ExamSystem;
 import com.example.utiltool2.examination.TabLayoutActivity;
 import com.example.utiltool2.glide.GlideActivity;
 import com.example.utiltool2.ipc.client.ClientActivity;
-import com.example.utiltool2.annotation.PermissionDenied;
-import com.example.utiltool2.annotation.PermissionDeniedForever;
-import com.example.utiltool2.annotation.PermissionNeed;
+import com.example.utiltool2.permission.PermissionSettingUtil;
 import com.example.utiltool2.signature.SignatureActivity;
 import com.example.utiltool2.ui.ScreenActivity;
 import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
+import com.example.utiltool2.ui.WeChatNavigation.WeChatBottomNavigationActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
+import com.example.utiltool2.ui.huawei_loading.LoadingDialog;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
@@ -60,6 +66,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_recyclerview_adapter).setOnClickListener(this);
         findViewById(R.id.btn_ipc).setOnClickListener(this);
         findViewById(R.id.btn_choose_picture).setOnClickListener(this);
+        findViewById(R.id.btn_WeChat).setOnClickListener(this);
+//        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
 //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
         iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
@@ -126,6 +134,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_choose_picture:
                 testPermission();
                 break;
+            case R.id.btn_WeChat:
+                weChat(v);
+                break;
 
         }
     }
@@ -162,8 +173,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @PermissionNeed(
             permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_CALENDAR,
-            Manifest.permission.CAMERA, Manifest.permission.BODY_SENSORS}, requestCode = 1)
+                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_CALENDAR,
+                    Manifest.permission.CAMERA, Manifest.permission.BODY_SENSORS}, requestCode = 1)
     private void testPermission() {
         Log.e("Permission", "Activity:权限获取成功: ");
     }
@@ -184,9 +195,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (requestCode) {
             case 1:
                 Log.e("Permission", "Activity:权限被永久拒绝: ");
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("权限不够");
+                builder.setPositiveButton("前往设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PermissionSettingUtil.gotoPermission(MainActivity.this);
+                    }
+                });
+                builder.show();
+
                 break;
             default:
                 break;
         }
+    }
+
+    public void decorator(View view) {
+        startActivity(new Intent(this, DecoratorActivity.class));
+    }
+
+    public void weChat(View view) {
+        startActivity(new Intent(this, WeChatBottomNavigationActivity.class));
+
+    }
+
+    public void loading(View view) {
+//        startActivity(new Intent(this, LoadingActivity.class));
+        LoadingDialog loadingDialog = new LoadingDialog(this);
+        loadingDialog.setBackgroundColor(R.color.transparent);
+        loadingDialog.show();
+
     }
 }

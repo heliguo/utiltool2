@@ -66,6 +66,10 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
         initView();
 
         adapter = new ExamViewPagerAdapter(viewList);
+
+        ViewPagerScroller scroller = new ViewPagerScroller(this);
+        scroller.setScrollDuration(1000);
+        scroller.initViewPagerScroll(examViewPager);
         examViewPager.setAdapter(adapter);
 
         examViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -91,17 +95,18 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
             }
 
         });
+        examViewPager.setPageTransformer(true,new DepthPageTransformer());
 
         examViewPager.setPagerListener(new PagerListener() {
             @Override
             public void scroll(float offsetX, float offsetY) {
                 if (offsetX < 0) {//右滑
                     if (sparseBooleanArray.get(examViewPager.getCurrentItem()))
-                        examViewPager.setCurrentItem(examViewPager.getCurrentItem() == questionNumber - 1 ? examViewPager.getCurrentItem() : examViewPager.getCurrentItem() + 1, true);
+                        setCurrenView(true);
                     Log.e(TAG, "scroll: < 0  ```` " + sparseBooleanArray.get(examViewPager.getCurrentItem()));
                 }
                 if (offsetX > 0) {//左滑
-                    examViewPager.setCurrentItem(examViewPager.getCurrentItem() == 0 ? 0 : examViewPager.getCurrentItem() - 1, true);
+                    setCurrenView(false);
                     Log.e(TAG, "scroll: > 0");
                 }
 
@@ -213,8 +218,7 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
             if (sparseBooleanArray.get(examViewPager.getCurrentItem())) {
                 //进入下一题或者提交
                 if (examViewPager.getCurrentItem() < questionNumber - 1) {
-                    examViewPager.setCurrentItem(examViewPager.getCurrentItem() + 1);
-
+                    setCurrenView(true);
                 } else {
                     //提交操作
 //                    barLayout.setBtnText( "确定");
@@ -241,9 +245,9 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                                 //答案正确，进入下一题或者提交
                                 sparseBooleanArray.put(examViewPager.getCurrentItem(), true);
                                 if (examViewPager.getCurrentItem() < questionNumber - 1) {
-                                    examViewPager.setCurrentItem(examViewPager.getCurrentItem() + 1);
+                                    setCurrenView(true);
                                 } else {
-                                    barLayout.setBtnText( "完成");
+                                    barLayout.setBtnText("完成");
                                     Log.e(TAG, "答对" + totalRight + ";答错" + totalFalse);
                                 }
 
@@ -301,10 +305,9 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
                         //答案正确，进入下一题或者提交
                         sparseBooleanArray.put(examViewPager.getCurrentItem(), true);
                         if (examViewPager.getCurrentItem() < questionNumber - 1) {
-                            examViewPager.setCurrentItem(examViewPager.getCurrentItem() + 1);
-
+                            setCurrenView(true);
                         } else {
-                            barLayout.setBtnText( "完成");
+                            barLayout.setBtnText("完成");
                             Log.e(TAG, "答对" + totalRight + ";答错" + totalFalse);
                         }
                         textViewSetUnClickable(textViewSparseArray);
@@ -410,5 +413,11 @@ public class ExamSystem extends AppCompatActivity implements View.OnClickListene
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, getResources().getDisplayMetrics());
     }
 
+    private void setCurrenView(boolean leftOrRight) {
+        if (!leftOrRight)
+            examViewPager.setCurrentItem(examViewPager.getCurrentItem() == 0 ? 0 : examViewPager.getCurrentItem() - 1, true);
+        else
+            examViewPager.setCurrentItem(examViewPager.getCurrentItem() == questionNumber - 1 ? examViewPager.getCurrentItem() : examViewPager.getCurrentItem() + 1, true);
+    }
 
 }

@@ -14,6 +14,8 @@ import com.example.utiltool2.BaseActivity;
 import com.example.utiltool2.permission.IPermissionCallback;
 import com.example.utiltool2.permission.PermissionUtil;
 
+import java.util.ArrayList;
+
 public class PermissionAspectActivity extends BaseActivity {
 
 

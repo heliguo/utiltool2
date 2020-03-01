@@ -3,10 +3,14 @@ package com.example.utiltool2.exam;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * author:lgh on 2019-12-11 11:22
@@ -60,7 +64,6 @@ public class ExamViewPager extends ViewPager {
                         pagerListener.scroll(offsetX, offsetY);
                     once = false;
                 }
-
                 lastX = currentX;
                 lastY = currentY;
                 break;
@@ -68,7 +71,6 @@ public class ExamViewPager extends ViewPager {
             case MotionEvent.ACTION_UP:
                 break;
         }
-
         return false;
     }
 

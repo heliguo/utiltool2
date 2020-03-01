@@ -14,8 +14,12 @@
 
         <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"响应滚动事件-->
 
-    </com.example.utiltool2.exam.ExamViewPager>
+<!--        <androidx.viewpager.widget.PagerTabStrip-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content" />-->
 
+
+    </com.example.utiltool2.exam.ExamViewPager>
 
 
 </com.example.utiltool2.examination.CoordinatorTabLayout>

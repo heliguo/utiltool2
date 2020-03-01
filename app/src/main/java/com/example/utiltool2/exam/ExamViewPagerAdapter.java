@@ -16,6 +16,7 @@ import java.util.List;
 public class ExamViewPagerAdapter extends PagerAdapter {
 
     private List<View> viewList;
+    private ViewLoadListener loadListener;
 
     public ExamViewPagerAdapter(List<View> viewList) {
         this.viewList = viewList;
@@ -27,6 +28,9 @@ public class ExamViewPagerAdapter extends PagerAdapter {
         return viewList.size();
     }
 
+    public void setLoadListener(ViewLoadListener loadListener) {
+        this.loadListener = loadListener;
+    }
 
     /**
      * 当ViewPager的内容有所变化时,进行调用。
@@ -48,6 +52,8 @@ public class ExamViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         container.addView(viewList.get(position));
+        if (loadListener != null)
+            loadListener.addView(viewList.get(position), position);
         return viewList.get(position);
     }
 
@@ -67,6 +73,9 @@ public class ExamViewPagerAdapter extends PagerAdapter {
             container.removeView(viewList.get(--position));
         } else {
             container.removeView(viewList.get(position));
+        }
+        if (loadListener != null) {
+            loadListener.removeView(position);
         }
     }
 
@@ -161,5 +170,11 @@ public class ExamViewPagerAdapter extends PagerAdapter {
         return super.getPageWidth(position);
     }
 
+    public interface ViewLoadListener {
+
+        void addView(View view, int position);
+
+        void removeView(int position);
+    }
 
 }
