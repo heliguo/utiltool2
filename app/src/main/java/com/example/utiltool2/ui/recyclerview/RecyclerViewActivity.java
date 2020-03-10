@@ -82,6 +82,11 @@ public class RecyclerViewActivity extends BaseActivity {
                 //The number of items in the bound adapter
                 int totalItemCount = linearLayoutManager.getItemCount(); // item总数
 
+
+                //当前页面最后一个显示的数据位置
+                ((LinearLayoutManager) linearLayoutManager).findLastVisibleItemPosition();
+                //当前页面显示的第一个数据位置
+                ((LinearLayoutManager) linearLayoutManager).findFirstVisibleItemPosition();
             }
         });
     }
