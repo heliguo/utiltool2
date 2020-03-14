@@ -7,13 +7,11 @@ import android.content.ContextWrapper;
 import androidx.annotation.Nullable;
 
 /**
+ * 从当前上下文获取Activity
  * author:lgh on 2019-11-18 11:23
  */
 public class ActivityUtils {
 
-    /**
-     * 从当前上下文获取Activity
-     */
     @Nullable
     static Activity getActivity(Context context) {
         if (context instanceof Activity) {
