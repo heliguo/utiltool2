@@ -32,14 +32,31 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * @author Michael Yang（www.yangfuhai.com） update at 2013.08.07
+ * Acache可以缓存如下数据：
+ *
+ * 普通的字符串、JsonObject、JsonArray、Bitmap、Drawable、
+ * 序列化的java对象，和 byte数据。
+ *
+ *主要特色：
+ *
+ * 1：轻，轻到只有一个JAVA文件。
+ * 2：可配置，可以配置缓存路径，缓存大小，缓存数量等。
+ * 3：可以设置缓存超时时间，缓存超时自动失效，并被删除。
+ * 4：支持多进程。
+ * 应用场景：
+ *
+ * 1、替换SharePreference当做配置文件
+ * 2、可以缓存网络请求数据，比如oschina的android客户端可以缓存http请求的新闻内容，
+ * 缓存时间假设为1个小时，超时后自动失效，让客户端重新请求新的数据，减少客户端流量，
+ * 同时减少服务器并发量。
+ *
  */
 public class ACache {
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
     private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
     private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
-    private static Map<String, ACache> mInstanceMap = new HashMap<String, ACache>();
+    private static Map<String, ACache> mInstanceMap = new HashMap<>();
     private ACacheManager mCache;
 
     public static ACache get(Context ctx) {
