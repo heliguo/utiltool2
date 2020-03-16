@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,6 +64,31 @@ public class RecyclerViewActivity extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(RecyclerViewActivity.this, DividerItemDecoration.VERTICAL_LIST));//加分割线
         setListener();
         recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager linearLayoutManager = recyclerView.getLayoutManager();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                //newState分 0,1,2三个状态,2是滚动状态,0是停止
+                // SCROLL_STATE_IDLE = 0
+                //SCROLL_STATE_DRAGGING = 1
+                //SCROLL_STATE_SETTLING = 2
+                super.onScrollStateChanged(recyclerView, newState);
+                //-1代表顶部,返回true表示没到顶,还可以滑
+                //1代表底部,返回true表示没到底部,还可以滑
+                boolean b = recyclerView.canScrollVertically(1);
+                boolean b1 = recyclerView.canScrollVertically(-1);
+                //Return the current number of child views attached to the parent RecyclerView
+                int visibleItemCount = linearLayoutManager.getChildCount(); //子数
+                //The number of items in the bound adapter
+                int totalItemCount = linearLayoutManager.getItemCount(); // item总数
+
+
+                //当前页面最后一个显示的数据位置
+                ((LinearLayoutManager) linearLayoutManager).findLastVisibleItemPosition();
+                //当前页面显示的第一个数据位置
+                ((LinearLayoutManager) linearLayoutManager).findFirstVisibleItemPosition();
+            }
+        });
     }
 
 
