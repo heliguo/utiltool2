@@ -45,9 +45,6 @@ public class OkHttpGlideUrlLoader implements ModelLoader<GlideUrl, InputStream> 
 
         private OkHttpClient client;
 
-        Factory() {
-        }
-
         public Factory(OkHttpClient client) {
             this.client = client;
         }

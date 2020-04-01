@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.request.target.CustomViewTarget;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 
@@ -16,21 +17,33 @@ import com.bumptech.glide.request.transition.Transition;
  */
 public class MyLayout extends LinearLayout {
 
-    private ViewTarget<MyLayout, Drawable> viewTarget;
+    private CustomViewTarget<MyLayout, Drawable> viewTarget;
 
     public MyLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         //this为当前实例
-        viewTarget = new ViewTarget<MyLayout, Drawable>(this) {
+        viewTarget = new CustomViewTarget<MyLayout, Drawable>(this) {
+
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                 MyLayout myLayout = getView();
                 myLayout.setImageAsBackground(resource);
             }
+
+            @Override
+            protected void onResourceCleared(@Nullable Drawable placeholder) {
+
+            }
+
+            @Override
+            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+
+            }
+
         };
     }
 
-    public ViewTarget<MyLayout, Drawable> getTarget() {
+    public CustomViewTarget<MyLayout, Drawable> getTarget() {
         return viewTarget;
     }
 
