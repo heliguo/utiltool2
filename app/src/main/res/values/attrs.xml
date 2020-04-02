@@ -71,4 +71,10 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="ThreeImageView">
+        <attr name="singleImgSize" format="dimension"/>
+        <attr name="imgGap" format="dimension"/>
+        <attr name="maxSize" format="integer"/>
+    </declare-styleable>
+
 </resources>
