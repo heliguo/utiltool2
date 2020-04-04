@@ -67,15 +67,14 @@ public class ProgressResponseBody extends ResponseBody {
         public long read(@NotNull Buffer sink, long byteCount) throws IOException {
             long byteRead = super.read(sink, byteCount);//正在下载量
             long fullLength = responseBody.contentLength();//下载总量
-            Log.d(TAG, "responseBody.contentLength: " + fullLength);
+            Log.e(TAG, "responseBody.contentLength: " + fullLength);
             if (byteCount == -1) {
                 totalBytesRead = fullLength;
             } else {
                 totalBytesRead += byteRead;
             }
             int progress = (int) (100f * totalBytesRead / fullLength);
-            System.out.println("download progress is " + progress);
-            Log.d(TAG, "download progress is " + progress);
+            Log.e(TAG, "download progress is " + progress);
             if (progressListener != null && progress != currentProgress) {
                 progressListener.onProgress(progress);
             }
