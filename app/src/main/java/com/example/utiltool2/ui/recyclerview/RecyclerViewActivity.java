@@ -21,6 +21,13 @@ import java.util.List;
 
 /**
  * author:lgh on 2019-10-17 14:50
+ *
+ * 1、computeVerticalScrollExtent()是当前屏幕显示的区域高度
+ * 2、computeVerticalScrollOffset() 是当前屏幕之前滑过的距离
+ * 3、computeVerticalScrollRange()是整个RecycleView控件的高度
+ * 4、recyclerView.getLastVisiblePosition()获取当前可见的最后一个item的position
+ *
+ *
  */
 public class RecyclerViewActivity extends BaseActivity {
 
