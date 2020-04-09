@@ -54,7 +54,6 @@
         <activity android:name="com.example.utiltool2.ui.slideview.ViewSlideActivity" />
         <activity android:name="com.example.utiltool2.glide.GlideActivity" />
         <activity android:name="com.example.utiltool2.ui.TreeViewActivity" />
-        <activity android:name="com.example.utiltool2.adapter.RecyclerAdapterActivity" />
         <activity android:name="com.example.utiltool2.ipc.client.ClientActivity" />
         <activity
             android:name="com.example.utiltool2.exam.ExamSystem"
@@ -95,6 +94,17 @@
         <activity android:name=".ui.huawei_loading.LoadingActivity" />
 
         <service android:name="com.example.utiltool2.ipc.server.RemoteService" />
+
+        <receiver
+            android:name=".util.NetworkChangeListenHelper$NetworkChangeBroadcastReceiver"
+            android:exported="true">
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
 
     </application>
 

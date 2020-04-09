@@ -16,6 +16,15 @@ import timemonitor.TimeMonitorManager;
  */
 public class BaseApplication extends Application {
 
+    public static BaseApplication instance;
+
+    public static BaseApplication getInstance() {
+        if (instance == null) {
+            instance = new BaseApplication();
+        }
+        return instance;
+    }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

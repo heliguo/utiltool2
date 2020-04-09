@@ -1,5 +1,6 @@
 package com.example.utiltool2.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -30,7 +31,7 @@ public class NetworkUtils {
     }
 
     //跳转网络设置界面
-    public static void goNetworkSetting(Context context){
+    public static void goNetworkSetting(Activity context){
 
         Intent intent = null;
         if (Build.VERSION.SDK_INT>10){//必须大于3.0
