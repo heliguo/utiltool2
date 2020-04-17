@@ -63,7 +63,7 @@ public class NetworkCheckApspect {
                 }
             }
             //操作3 跳转网络设置
-            NetworkUtils.goNetworkSetting(context);
+//            NetworkUtils.goNetworkSetting(context);
         }
         //是否使用@NetworkCheck 注解
 
