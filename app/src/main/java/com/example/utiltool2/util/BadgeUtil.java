@@ -1,4 +1,4 @@
-package com.example.utiltool2;
+package com.example.utiltool2.util;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -15,16 +15,63 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.utiltool2.R;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
 /**
  * author:lgh on 2020-04-10 15:24
+ * <p> xiaomi 需 Notification 图标
+ * <p>
+ * <!--for android-->
+ * <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+ * <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/>
+ * <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+ * <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+ * <p>
+ * <!--  for HuaWei  -->
+ * <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+ * <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+ * <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
+ * <uses-permission android:name="android.permission.WRITE_APP_BADGE" />
+ * <p>
+ * <!--for Samsung-->
+ * <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+ * <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+ * <p>
+ * <!--for htc-->
+ * <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+ * <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+ * <p>
+ * <!--for sony-->
+ * <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+ * <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" />
+ * <p>
+ * <!--for apex-->
+ * <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" />
+ * <p>
+ * <!--for solid-->
+ * <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" />
+ * <p>
+ * <!--for ZUK-->
+ * <uses-permission android:name="android.permission.READ_APP_BADGE" />
+ * <p>
+ * <!--for OPPO-->
+ * <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+ * <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" />
+ * <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+ * <p>
+ * <!--for EvMe-->
+ * <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+ * <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
  */
-public class BadgeUtils {
 
-    private BadgeUtils() throws InstantiationException {
+
+public class BadgeUtil {
+
+    private BadgeUtil() throws InstantiationException {
         throw new InstantiationException("This class is not for instantiation");
     }
 
@@ -73,10 +120,12 @@ public class BadgeUtils {
      * 设置MIUI的Badge
      */
     private static void setBadgeOfMIUI(Context context, int count, int iconResId) {
+
         NotificationManager mNotificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        builder.setContentTitle("标题").setContentText("消息正文").setSmallIcon(iconResId);
+        builder.setContentTitle(context.getString(R.string.app_name))
+                .setContentText("账号信息需要更新").setSmallIcon(iconResId);
         Notification notification = builder.build();
         try {
             Field field = notification.getClass().getDeclaredField("extraNotification");
@@ -91,7 +140,6 @@ public class BadgeUtils {
 
     /**
      * 设置索尼的Badge
-     * 需添加权限：<uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
      */
     private static void setBadgeOfSony(Context context, int count) {
         String launcherClassName = getLauncherClassName(context);
@@ -177,7 +225,7 @@ public class BadgeUtils {
         try {
 
             Intent intent = new Intent("com.oppo.unsettledevent");
-            intent.putExtra("pakeageName", context.getPackageName());
+            intent.putExtra("packageName", context.getPackageName());
             intent.putExtra("number", count);
             intent.putExtra("upgradeNumber", count);
             if (canResolveBroadcast(context, intent)) {
@@ -186,7 +234,8 @@ public class BadgeUtils {
                 try {
                     Bundle extras = new Bundle();
                     extras.putInt("app_badge_count", count);
-                    context.getContentResolver().call(Uri.parse("content://com.android.badge/badge"), "setAppBadgeCount", null, extras);
+                    context.getContentResolver().call(Uri.parse("content://com.android.badge/badge"),
+                            "setAppBadgeCount", null, extras);
                 } catch (Throwable t) {
                     t.printStackTrace();
                 }
@@ -211,7 +260,7 @@ public class BadgeUtils {
      * 华为手机更新应用桌面角标需要的权限
      * <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
      * <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
-     *     <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
+     * <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
      */
     private static void setHuaweiBadge(Context context, int count) {
         try {
