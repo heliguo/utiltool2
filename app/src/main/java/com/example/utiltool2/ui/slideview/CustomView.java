@@ -94,7 +94,7 @@ public class CustomView extends View {
         int delta = destX - scrollX;
         int deltaY = destY - scrollY;
         //1000秒内滑向destX
-        mScroller.startScroll(scrollX, scrollX, delta, deltaY, time);//与coputeScroll同时使用
+        mScroller.startScroll(scrollX, scrollX, delta, deltaY, time);//与computeScroll同时使用
         invalidate();
     }
 
