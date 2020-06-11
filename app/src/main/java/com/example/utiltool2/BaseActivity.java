@@ -11,7 +11,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.library.InjectManager;
+import com.example.annotationlibrary.InjectManager;
 import com.example.utiltool2.net.broadcastreceiver.NetworkChangeEvent;
 import com.example.utiltool2.util.NetUtils;
 

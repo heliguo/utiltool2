@@ -3,24 +3,22 @@ package com.example.utiltool2.adapter;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.example.library.InjectManager;
-import com.example.library.RViewHelper;
-import com.example.library.SwipeRefreshHelper;
-import com.example.library.annotations.ContentView;
-import com.example.library.core.RViewCreate;
-import com.example.utiltool2.R;
-
-import java.util.List;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.example.rvlibrary.RViewHelper;
+import com.example.rvlibrary.SwipeRefreshHelper;
+import com.example.rvlibrary.core.RViewCreate;
+import com.example.annotationlibrary.InjectManager;
+import com.example.utiltool2.R;
+
+import java.util.List;
 
 
 /**
  * author:lgh on 2019-11-14 11:32
  */
-@ContentView(R.layout.activity_recyclerview_adpter)
 public abstract class BaseAdapterActivity extends AppCompatActivity implements RViewCreate, SwipeRefreshHelper.SwipeRefreshListener {
 
     protected RViewHelper helper;

@@ -1,2 +1,3 @@
+include ':annotationlibrary'
 include ':app', ':rvlibrary'
 rootProject.name='utiltool2'

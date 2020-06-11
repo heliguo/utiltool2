@@ -3,10 +3,9 @@ package com.example.utiltool2.adapter;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.library.annotations.ContentView;
-import com.example.library.base.RViewAdapter;
-import com.example.library.holder.RViewHolder;
-import com.example.library.model.RViewItem;
+import com.example.rvlibrary.base.RViewAdapter;
+import com.example.rvlibrary.holder.RViewHolder;
+import com.example.rvlibrary.model.RViewItem;
 import com.example.utiltool2.R;
 
 import java.util.ArrayList;
