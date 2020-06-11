@@ -12,6 +12,14 @@
         tools:context=".MainActivity">
 
         <Button
+            android:id="@+id/btn_scrolltable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="scrolltable"
+            android:textAllCaps="false"
+            android:onClick="scrolltable"/>
+
+        <Button
             android:id="@+id/btn_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

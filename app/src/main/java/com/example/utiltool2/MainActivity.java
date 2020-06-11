@@ -13,7 +13,6 @@ import android.view.View;
 import androidx.core.app.ActivityCompat;
 
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.example.utiltool2.adapter.BaseAdapterActivity;
 import com.example.utiltool2.adapter.RViewAdapterActivity;
 import com.example.utiltool2.annotation.LogRecord;
 import com.example.utiltool2.annotation.NetworkCheck;
@@ -29,6 +28,7 @@ import com.example.utiltool2.ipc.client.ClientActivity;
 import com.example.utiltool2.permission.PermissionSettingUtil;
 import com.example.utiltool2.signature.SignatureActivity;
 import com.example.utiltool2.ui.ScreenActivity;
+import com.example.utiltool2.ui.ScrollTable.ScrollTableActivity;
 import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.WeChatNavigation.WeChatBottomNavigationActivity;
@@ -44,8 +44,8 @@ import timemonitor.TimeMonitorManager;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private static final int      REQUEST_EXTERNAL_STORAGE = 1;
+    private static       String[] PERMISSIONS_STORAGE      = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     TimePickerView view;
 
@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 recordingTimeTag("MainActivity-onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        verifyStoragePermissions(this);//权限申请
+        //        verifyStoragePermissions(this);//权限申请
         findViewById(R.id.btn_recyclerview).setOnClickListener(this);
         findViewById(R.id.btn_notification).setOnClickListener(this);
         findViewById(R.id.btn_cardview).setOnClickListener(this);
@@ -67,9 +67,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_ipc).setOnClickListener(this);
         findViewById(R.id.btn_choose_picture).setOnClickListener(this);
         findViewById(R.id.btn_WeChat).setOnClickListener(this);
-//        findViewById(R.id.btn_decorator).setOnClickListener(this);
+        //        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
-//        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
+        //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
         iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
         TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START)
                 .recordingTimeTag("MainActivity-onCreate-Over");
@@ -222,10 +222,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void loading(View view) {
-//        startActivity(new Intent(this, LoadingActivity.class));
+        //        startActivity(new Intent(this, LoadingActivity.class));
         LoadingDialog loadingDialog = new LoadingDialog(this);
         loadingDialog.setBackgroundColor(R.color.transparent);
         loadingDialog.show();
+
+    }
+
+    public void scrolltable(View view) {
+        startActivity(new Intent(this, ScrollTableActivity.class));
 
     }
 }
