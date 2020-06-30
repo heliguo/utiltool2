@@ -126,4 +126,5 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
         notifyDataSetChanged();
     }
 
+
 }

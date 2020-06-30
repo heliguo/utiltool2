@@ -1,8 +1,7 @@
-package com.example.utiltool2.ui.ScrollTable;
+package com.example.utiltool2.ui.ScrollTable.listview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
@@ -15,11 +14,8 @@ import android.widget.LinearLayout;
 
 public class InterceptScrollContainer extends LinearLayout {
 
-    public static final String TAG = "InterceptScrollContainer";
-
     public InterceptScrollContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
-
     }
 
     public InterceptScrollContainer(Context context) {
@@ -31,8 +27,7 @@ public class InterceptScrollContainer extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "ScrollContainer onInterceptTouchEvent");
-//        return (ev.getRawY() > 150.0) ? true : false;//返回ture，以后每次事件分发下来，将不会传递给子view了，将由父view处理
+
         return true;
     }
 

@@ -12,20 +12,26 @@
         tools:context=".MainActivity">
 
         <Button
+            android:id="@+id/btn_rv_scrolltable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rv_scroll"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btn_scrolltable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="scrolltable"
-            android:textAllCaps="false"
-            android:onClick="scrolltable"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="loading"
             android:text="loading"
-            android:textAllCaps="false"
-            android:onClick="loading"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_WeChat"

@@ -1,12 +1,12 @@
-package com.example.utiltool2.ui.ScrollTable;
+package com.example.utiltool2.ui.ScrollTable.listview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 
 import com.example.utiltool2.R;
 
@@ -49,6 +49,7 @@ public class HSAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -62,7 +63,9 @@ public class HSAdapter extends BaseAdapter {
             holder.hScrollView = convertView.findViewById(R.id.hscrollview);
             //这里需要从传入的列表头拿到里面的右侧滑动控件
             //将当前条目的右侧滑动控件添加到头部滑动控件的滑动观察者集合中
-            mHScrollView.addOnScrollChangedListener(new HScrollViewImp(holder.hScrollView));
+            mHScrollView.addOnScrollChangedListener((l, oldl, t, oldt) ->
+                    holder.hScrollView.smoothScrollTo(l, t)
+            );
             //进行holder的初始化操作
             holder.tv1 = convertView.findViewById(R.id.textview1);
             holder.tv2 = convertView.findViewById(R.id.textview2);
@@ -76,7 +79,8 @@ public class HSAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.tv1.setText(mProductDataList.get(position).getStr1());
-        holder.tv2.setText(mProductDataList.get(position).getStr1() + mProductDataList.get(position).getStr2());
+        holder.tv2.setText(mProductDataList.get(position).getStr1() +
+                mProductDataList.get(position).getStr2());
         holder.tv3.setText(mProductDataList.get(position).getStr3());
         holder.tv4.setText(mProductDataList.get(position).getStr4());
         holder.tv5.setText(mProductDataList.get(position).getStr5());
@@ -87,7 +91,7 @@ public class HSAdapter extends BaseAdapter {
     }
 
 
-    class ViewHolder {
+    static class ViewHolder {
         TextView    tv1;
         TextView    tv2;
         TextView    tv3;
@@ -97,25 +101,5 @@ public class HSAdapter extends BaseAdapter {
         TextView    tv7;
         HScrollView hScrollView;
     }
-
-    /**
-     * HScrollView的对象包裹进来，
-     * 实现接口OnScrollChangedListener中onScrollChanged的方法
-     */
-    public class HScrollViewImp implements HScrollView.OnScrollChangedListener {
-
-        HScrollView mScrollView;
-
-        HScrollViewImp(HScrollView scrollView) {
-            mScrollView = scrollView;
-        }
-
-        @Override
-        public void onScrollChanged(int l, int t, int oldl, int oldt) {
-            mScrollView.smoothScrollTo(l, t);
-        }
-    }
-
-
 
 }

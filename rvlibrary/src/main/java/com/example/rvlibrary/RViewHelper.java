@@ -3,15 +3,15 @@ package com.example.rvlibrary;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.rvlibrary.base.RViewAdapter;
-import com.example.rvlibrary.core.RViewCreate;
-
-import java.util.List;
-
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.example.rvlibrary.base.RViewAdapter;
+import com.example.rvlibrary.core.RViewCreate;
+
+import java.util.List;
 
 /**
  * author:lgh on 2019-11-14 15:45
@@ -55,6 +55,7 @@ public class RViewHelper<T> {
                     swipeRefreshListener.OnRefresh();
             });
         }
+        recyclerView.setAdapter(adapter);
 
     }
 

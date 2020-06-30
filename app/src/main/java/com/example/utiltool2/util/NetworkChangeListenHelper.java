@@ -20,7 +20,8 @@ import com.example.utiltool2.BaseApplication;
  * 说明：
  * 1、静态注册广播监听网络变化 的方式，{@link ConnectivityManager#CONNECTIVITY_ACTION}已有说明，
  *      7.0及以后 静态注册的接收器不会收到 CONNECTIVITY_ACTION，只能用动态注册。（这是官方对广播权限的限制）
- * 2、5.0后有新的api{@link ConnectivityManager.NetworkCallback} ,但是只能在app 存活时监听到。和动态注册效果类似，但有更多细节的回调。
+ * 2、5.0后有新的api{@link ConnectivityManager.NetworkCallback} ,
+ * 但是只能在app 存活时监听到。和动态注册效果类似，但有更多细节的回调。
  *
  * 综合这两点，本类实现方案：7.0及以后使用新api，只能在app存活时接收到回调；7.0以前使用静态注册广播。
  */

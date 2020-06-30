@@ -114,6 +114,7 @@ public class RecyclerViewActivity extends BaseActivity {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4,
                 StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(RecyclerViewActivity.this));//加分割线
         staggeredHomeAdapter = new StaggeredHomeAdapter(this, list);
         staggeredHomeAdapter.setOnItemClickLitener(new StaggeredHomeAdapter.OnItemClickLitener() {
             @Override

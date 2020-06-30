@@ -15,21 +15,18 @@
         android:text="@string/column1"
         android:textColor="#333333" />
 
-    <com.example.utiltool2.ui.ScrollTable.InterceptScrollContainer
+    <com.example.utiltool2.ui.ScrollTable.listview.InterceptScrollContainer
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@+id/textview1"
-        android:layout_toRightOf="@id/textview1"
-        android:focusable="false">
+        android:layout_toEndOf="@+id/textview1">
 
 
-        <com.example.utiltool2.ui.ScrollTable.HScrollView
+        <com.example.utiltool2.ui.ScrollTable.listview.HScrollView
             android:id="@+id/hscrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
+            android:focusable="true"
             android:scrollbars="none">
 
             <LinearLayout
@@ -82,9 +79,9 @@
 
             </LinearLayout>
 
-        </com.example.utiltool2.ui.ScrollTable.HScrollView>
+        </com.example.utiltool2.ui.ScrollTable.listview.HScrollView>
 
-    </com.example.utiltool2.ui.ScrollTable.InterceptScrollContainer>
+    </com.example.utiltool2.ui.ScrollTable.listview.InterceptScrollContainer>
 
 
 </RelativeLayout>

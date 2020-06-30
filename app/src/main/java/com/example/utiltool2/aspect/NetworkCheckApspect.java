@@ -28,7 +28,7 @@ public class NetworkCheckApspect {
 
     //切面处理
     @Around("pointActionMethod()")
-    public void aProceeedingJoinPoint(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public void aProceedingJoinPoint(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         //拿到环境
         Context context = null;//初始化Context ，兼容性处理
 
@@ -63,7 +63,7 @@ public class NetworkCheckApspect {
                 }
             }
             //操作3 跳转网络设置
-//            NetworkUtils.goNetworkSetting(context);
+            //            NetworkUtils.goNetworkSetting(context);
         }
         //是否使用@NetworkCheck 注解
 

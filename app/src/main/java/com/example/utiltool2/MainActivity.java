@@ -28,7 +28,8 @@ import com.example.utiltool2.ipc.client.ClientActivity;
 import com.example.utiltool2.permission.PermissionSettingUtil;
 import com.example.utiltool2.signature.SignatureActivity;
 import com.example.utiltool2.ui.ScreenActivity;
-import com.example.utiltool2.ui.ScrollTable.ScrollTableActivity;
+import com.example.utiltool2.ui.ScrollTable.listview.ScrollTableActivity;
+import com.example.utiltool2.ui.ScrollTable.recyclerview.ScrolltableActivity;
 import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.WeChatNavigation.WeChatBottomNavigationActivity;
@@ -67,6 +68,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_ipc).setOnClickListener(this);
         findViewById(R.id.btn_choose_picture).setOnClickListener(this);
         findViewById(R.id.btn_WeChat).setOnClickListener(this);
+        findViewById(R.id.btn_scrolltable).setOnClickListener(this);
+        findViewById(R.id.btn_rv_scrolltable).setOnClickListener(this);
         //        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
         //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
@@ -134,8 +137,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_choose_picture:
                 testPermission();
                 break;
+            case R.id.btn_scrolltable:
+                startActivity(new Intent(this, ScrollTableActivity.class));
+                break;
             case R.id.btn_WeChat:
                 weChat(v);
+                break;
+            case R.id.btn_rv_scrolltable:
+                startActivity(new Intent(this, ScrolltableActivity.class));
                 break;
 
         }
@@ -226,11 +235,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         LoadingDialog loadingDialog = new LoadingDialog(this);
         loadingDialog.setBackgroundColor(R.color.transparent);
         loadingDialog.show();
-
-    }
-
-    public void scrolltable(View view) {
-        startActivity(new Intent(this, ScrollTableActivity.class));
 
     }
 }

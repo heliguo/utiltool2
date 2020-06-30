@@ -1,4 +1,4 @@
-package com.example.utiltool2.ui.ScrollTable;
+package com.example.utiltool2.ui.ScrollTable.listview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @创建者 lgh
  * @创建时间 2019-08-20 15:33
- * @描述 观察者模式自定义HorizonalScrollView
+ * @描述 观察者模式自定义 HorizonalScrollView
  */
 public class HScrollView extends HorizontalScrollView {
 
@@ -38,7 +38,7 @@ public class HScrollView extends HorizontalScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         if (mObserver != null && (l != oldl || t != oldt)) {
-            mObserver.notifyOnScrollChanged(l, t, oldl, oldt);//响应滑动事件
+            mObserver.notifyOnScrollChanged(l, t, oldl, oldt);//通知所有观察者
         }
         super.onScrollChanged(l, t, oldl, oldt);
     }
@@ -55,7 +55,7 @@ public class HScrollView extends HorizontalScrollView {
     }
 
     /**
-     *监听接口
+     * 监听接口
      */
     public interface OnScrollChangedListener {
         void onScrollChanged(int l, int t, int oldl, int oldt);
@@ -68,8 +68,8 @@ public class HScrollView extends HorizontalScrollView {
      * 同时响应OnScrollChangedListener执行onScrollChanged方法
      */
 
-    public class ScrollViewObserver {
-        List<OnScrollChangedListener> mListeners ;
+    public static class ScrollViewObserver {
+        List<OnScrollChangedListener> mListeners;
 
         ScrollViewObserver() {
             mListeners = new ArrayList<>();
@@ -87,12 +87,8 @@ public class HScrollView extends HorizontalScrollView {
             if (mListeners == null || mListeners.size() == 0) {
                 return;
             }
-//            for (int i = 0; i < mListeners.size(); i++) {
-//                OnScrollChangedListener listener = mListeners.get(i);
-//                listener.onScrollChanged(l, t, oldl, oldt);
-//            }
             for (OnScrollChangedListener mListener : mListeners) {
-                mListener.onScrollChanged(l,t,oldl,oldt);
+                mListener.onScrollChanged(l, t, oldl, oldt);
             }
         }
 

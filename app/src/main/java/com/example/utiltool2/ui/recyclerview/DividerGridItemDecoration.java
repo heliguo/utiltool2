@@ -3,9 +3,10 @@ package com.example.utiltool2.ui.recyclerview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
 import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,22 +18,27 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
  */
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
-    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
-    private Drawable mDivider;
+    private static final int[]    ATTRS = new int[]{android.R.attr.listDivider};
+    private              Drawable mDivider;
+    private              Paint    mPaint;
+
 
     public DividerGridItemDecoration(Context context) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(Color.RED);
+        mPaint.setStrokeWidth(10);
+        mPaint.setStyle(Paint.Style.FILL);
         a.recycle();
     }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-
         drawHorizontal(c, parent);
         drawVertical(c, parent);
-
     }
+
 
     private int getSpanCount(RecyclerView parent) {
         // 列数
@@ -59,8 +65,9 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                     + mDivider.getIntrinsicWidth();
             final int top = child.getBottom() + params.bottomMargin;
             final int bottom = top + mDivider.getIntrinsicHeight();
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
+            //            mDivider.setBounds(left, top, right, bottom);
+            //            mDivider.draw(c);
+            c.drawRect(left, top, right, bottom, mPaint);
         }
     }
 
@@ -76,8 +83,9 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             final int left = child.getRight() + params.rightMargin;
             final int right = left + mDivider.getIntrinsicWidth();
 
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
+            //            mDivider.setBounds(left, top, right, bottom);
+            //            mDivider.draw(c);
+            c.drawRect(left, top, right, bottom, mPaint);
         }
     }
 
