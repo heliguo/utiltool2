@@ -65,7 +65,7 @@ public class PermissionAspectActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        //现在拿到了权限的申请结果，那么如何处理，我这个Activity只是为了申请，然后把结果告诉外界，所以结果的处理只能是外界传进来
+        //现在拿到了权限的申请结果，那么如何处理，这个Activity只是为了申请，然后把结果告诉外界，所以结果的处理只能是外界传进来
         boolean granted = PermissionUtil.verifyPermissions(grantResults);
         if (granted) {//如果用户给了权限
             mCallback.granted(requestCode);
