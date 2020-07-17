@@ -28,10 +28,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeWelcome"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.ScrollTable.recyclerview.ScrolltableActivity"></activity>
+        <activity android:name=".annotations.AnnotationActivity"></activity>
+        <activity android:name=".ui.ScrollTable.recyclerview.ScrolltableActivity" />
         <activity
             android:name=".ui.recyclerview.RecyclerViewActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".ui.notification.NotificationActivity" />
         <activity android:name=".ui.cardview.CardViewActivity" />
         <activity android:name=".MainActivity">
@@ -41,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".BaseActivity" />
         <activity android:name=".ui.ScreenActivity" />
         <activity android:name=".ui.slideview.ViewSlideActivity" />
         <activity android:name=".glide.GlideActivity" />
@@ -49,7 +50,7 @@
         <activity android:name=".ipc.client.ClientActivity" />
         <activity
             android:name=".exam.ExamSystem"
-            android:theme="@style/AppThemeNoActionbar"></activity>
+            android:theme="@style/AppThemeNoActionbar" />
         <activity
             android:name=".examination.TabLayoutActivity"
             android:theme="@style/Theme.imgFullScreen" />
@@ -83,6 +84,8 @@
         <activity android:name=".ui.huawei_loading.LoadingActivity" />
         <activity android:name=".adapter.BaseAdapterActivity" />
         <activity android:name=".ui.ScrollTable.listview.ScrollTableActivity" />
+        <activity android:name=".adapter.RViewAdapterActivity" />
+        <activity android:name=".ui.ImageLoad.ImageLoadActivity" />
 
         <service android:name=".ipc.server.RemoteService" />
 

@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +16,13 @@ import androidx.core.app.ActivityCompat;
 
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.utiltool2.adapter.RViewAdapterActivity;
-import com.example.utiltool2.annotation.LogRecord;
-import com.example.utiltool2.annotation.NetworkCheck;
-import com.example.utiltool2.annotation.NoNetworkShow;
-import com.example.utiltool2.annotation.PermissionDenied;
-import com.example.utiltool2.annotation.PermissionDeniedForever;
-import com.example.utiltool2.annotation.PermissionNeed;
+import com.example.utiltool2.annotations.AnnotationActivity;
+import com.example.utiltool2.aspectjannotation.LogRecord;
+import com.example.utiltool2.aspectjannotation.NetworkCheck;
+import com.example.utiltool2.aspectjannotation.NoNetworkShow;
+import com.example.utiltool2.aspectjannotation.PermissionDenied;
+import com.example.utiltool2.aspectjannotation.PermissionDeniedForever;
+import com.example.utiltool2.aspectjannotation.PermissionNeed;
 import com.example.utiltool2.decorator.DecoratorActivity;
 import com.example.utiltool2.exam.ExamSystem;
 import com.example.utiltool2.examination.TabLayoutActivity;
@@ -27,7 +30,7 @@ import com.example.utiltool2.glide.GlideActivity;
 import com.example.utiltool2.ipc.client.ClientActivity;
 import com.example.utiltool2.permission.PermissionSettingUtil;
 import com.example.utiltool2.signature.SignatureActivity;
-import com.example.utiltool2.ui.ScreenActivity;
+import com.example.utiltool2.ui.ImageLoad.ImageLoadActivity;
 import com.example.utiltool2.ui.ScrollTable.listview.ScrollTableActivity;
 import com.example.utiltool2.ui.ScrollTable.recyclerview.ScrolltableActivity;
 import com.example.utiltool2.ui.SelfImageView;
@@ -38,6 +41,10 @@ import com.example.utiltool2.ui.huawei_loading.LoadingDialog;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
+
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import timemonitor.TimeMonitorConfig;
 import timemonitor.TimeMonitorManager;
@@ -70,6 +77,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_WeChat).setOnClickListener(this);
         findViewById(R.id.btn_scrolltable).setOnClickListener(this);
         findViewById(R.id.btn_rv_scrolltable).setOnClickListener(this);
+        findViewById(R.id.btn_annotation).setOnClickListener(this);
         //        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
         //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
@@ -118,7 +126,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
 
             case R.id.btn_screen_draw:
-                startActivity(new Intent(MainActivity.this, ScreenActivity.class));
+                startActivity(new Intent(MainActivity.this, ImageLoadActivity.class));
                 break;
             case R.id.btn_glide:
                 startActivity(new Intent(MainActivity.this, GlideActivity.class));
@@ -145,6 +153,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_rv_scrolltable:
                 startActivity(new Intent(this, ScrolltableActivity.class));
+                break;
+            case R.id.btn_annotation:
+                startActivity(new Intent(this, AnnotationActivity.class));
                 break;
 
         }
@@ -235,6 +246,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         LoadingDialog loadingDialog = new LoadingDialog(this);
         loadingDialog.setBackgroundColor(R.color.transparent);
         loadingDialog.show();
-
+        try {
+            FileInputStream fileInputStream = new FileInputStream("");
+            FileDescriptor fd = fileInputStream.getFD();
+            Bitmap bitmap = BitmapFactory.decodeFileDescriptor(fd);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

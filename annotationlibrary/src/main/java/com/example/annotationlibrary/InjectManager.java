@@ -98,13 +98,12 @@ public class InjectManager {
             Annotation[] annotations = method.getDeclaredAnnotations();
             //遍历注解
             for (Annotation annotation : annotations) {
-                //获取注解类型
+                //获取注解类型 onClick
                 Class<? extends Annotation> annotationType = annotation.annotationType();
                 if (annotationType != null) {
                     EventsBase eventsBase = annotationType.getAnnotation(EventsBase.class);
                     if (eventsBase != null) {
                         //获取事件的三个信息
-
                         //方法名 setOnClickListener
                         String listenerSetter = eventsBase.listenerSetter();
                         //事件类 view.OnClickListener.class
@@ -113,10 +112,11 @@ public class InjectManager {
                         String callBackListener = eventsBase.callBackListener();
                         try {
                             Method valueMethod = annotationType.getDeclaredMethod("value");
+                            valueMethod.setAccessible(true);
                             int[] viewIds = (int[]) valueMethod.invoke(annotation);//得到属性数组
 
                             ListenerInvocationHandler handler = new ListenerInvocationHandler(activity);
-                            handler.addMethod(callBackListener,method);
+                            handler.addMethod(callBackListener,method);//clickShow()
 
                             //代理方式，注解是什么就匹配对应的监听方法和回调,拦截onclick方法执行用户自定义方法
                             Object listener = Proxy.newProxyInstance(listenerType.getClassLoader(), new Class[]{listenerType}, handler);

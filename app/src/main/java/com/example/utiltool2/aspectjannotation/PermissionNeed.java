@@ -1,4 +1,4 @@
-package com.example.utiltool2.annotation;
+package com.example.utiltool2.aspectjannotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

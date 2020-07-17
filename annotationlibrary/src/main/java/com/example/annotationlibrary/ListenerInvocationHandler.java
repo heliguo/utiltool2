@@ -24,6 +24,7 @@ public class ListenerInvocationHandler implements InvocationHandler {
             String name = method.getName();
             method = methodHashMap.get(name);//如果集合中有需要拦截的方法,直接赋值
             if (method != null) {
+                method.setAccessible(true);//声明可访问private方法
                 return method.invoke(target, objects);
             }
         }
@@ -33,8 +34,8 @@ public class ListenerInvocationHandler implements InvocationHandler {
     /**
      * 拦截的方法和替换执行的方法
      *
-     * @param methodName 拦截的方法名如：onClick()
-     * @param method     执行自定义的方法：onShow()
+     * @param methodName 拦截的方法名如：onClick
+     * @param method     执行自定义的方法：onShow
      */
     public void addMethod(String methodName, Method method) {
         methodHashMap.put(methodName, method);

@@ -3,9 +3,9 @@ package com.example.utiltool2.aspect;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.utiltool2.annotation.PermissionDenied;
-import com.example.utiltool2.annotation.PermissionDeniedForever;
-import com.example.utiltool2.annotation.PermissionNeed;
+import com.example.utiltool2.aspectjannotation.PermissionDenied;
+import com.example.utiltool2.aspectjannotation.PermissionDeniedForever;
+import com.example.utiltool2.aspectjannotation.PermissionNeed;
 import com.example.utiltool2.permission.ApplicationUtil;
 import com.example.utiltool2.permission.IPermissionCallback;
 import com.example.utiltool2.permission.PermissionUtil;

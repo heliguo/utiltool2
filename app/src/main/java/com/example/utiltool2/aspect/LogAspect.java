@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.utiltool2.annotation.LogRecord;
+import com.example.utiltool2.aspectjannotation.LogRecord;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.utiltool2.annotation.NoNetworkShow;
+import com.example.utiltool2.aspectjannotation.NoNetworkShow;
 import com.example.utiltool2.util.NetworkUtils;
 
 import org.aspectj.lang.ProceedingJoinPoint;

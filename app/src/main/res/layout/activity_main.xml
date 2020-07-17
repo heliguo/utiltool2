@@ -12,11 +12,19 @@
         tools:context=".MainActivity">
 
         <Button
+            android:id="@+id/btn_annotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义注解"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btn_rv_scrolltable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="rv_scroll"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_scrolltable"
@@ -83,7 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RecyclerView_Adapter"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_treeview"
