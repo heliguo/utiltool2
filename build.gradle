@@ -17,6 +17,17 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+//强制转换依赖
+//subprojects {
+//    project.configurations.all {
+//        resolutionStrategy.eachDependency { details ->
+//            if (details.requested.group == 'com.android.support'
+//                    && !details.requested.name.contains('multidex') ) {
+//                details.useVersion "26.1.0"
+//            }
+//        }
+//    }
+//}
 
 allprojects {
     repositories {

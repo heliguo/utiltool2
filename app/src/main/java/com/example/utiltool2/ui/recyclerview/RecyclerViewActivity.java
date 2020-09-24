@@ -58,9 +58,9 @@ public class RecyclerViewActivity extends BaseActivity {
         //设置ListView
 //        setListView();
         //设置GridView
-//        setGridView();
+        setGridView();
 //        //设置瀑布流
-        setWaterfallView();
+//        setWaterfallView();
 
     }
 
@@ -100,9 +100,9 @@ public class RecyclerViewActivity extends BaseActivity {
 
 
     private void setGridView() {
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4,
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
-//        recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());//默认加载动画
         adapter = new MyRecyclerViewAdapter(this, list);
         setListener();

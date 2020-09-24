@@ -86,6 +86,7 @@
         <activity android:name=".ui.ScrollTable.listview.ScrollTableActivity" />
         <activity android:name=".adapter.RViewAdapterActivity" />
         <activity android:name=".ui.ImageLoad.ImageLoadActivity" />
+        <activity android:name=".updategallery.UpdateGalleryActivity" />
 
         <service android:name=".ipc.server.RemoteService" />
 

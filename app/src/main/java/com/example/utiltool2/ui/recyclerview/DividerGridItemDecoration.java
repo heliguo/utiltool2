@@ -18,18 +18,18 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
  */
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
-    private static final int[]    ATTRS = new int[]{android.R.attr.listDivider};
-    private              Drawable mDivider;
-    private              Paint    mPaint;
+    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
+    private Drawable mDivider;
+    //    private              Paint    mPaint;
 
 
     public DividerGridItemDecoration(Context context) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(Color.RED);
-        mPaint.setStrokeWidth(10);
-        mPaint.setStyle(Paint.Style.FILL);
+        //        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //        mPaint.setColor(Color.RED);
+        //        mPaint.setStrokeWidth(10);
+        //        mPaint.setStyle(Paint.Style.FILL);
         a.recycle();
     }
 
@@ -65,9 +65,9 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                     + mDivider.getIntrinsicWidth();
             final int top = child.getBottom() + params.bottomMargin;
             final int bottom = top + mDivider.getIntrinsicHeight();
-            //            mDivider.setBounds(left, top, right, bottom);
-            //            mDivider.draw(c);
-            c.drawRect(left, top, right, bottom, mPaint);
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+            //            c.drawRect(left, top, right, bottom, mPaint);
         }
     }
 
@@ -83,9 +83,9 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             final int left = child.getRight() + params.rightMargin;
             final int right = left + mDivider.getIntrinsicWidth();
 
-            //            mDivider.setBounds(left, top, right, bottom);
-            //            mDivider.draw(c);
-            c.drawRect(left, top, right, bottom, mPaint);
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+            //            c.drawRect(left, top, right, bottom, mPaint);
         }
     }
 

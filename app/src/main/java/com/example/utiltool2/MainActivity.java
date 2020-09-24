@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import androidx.core.app.ActivityCompat;
 
@@ -52,8 +53,8 @@ import timemonitor.TimeMonitorManager;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
-    private static final int      REQUEST_EXTERNAL_STORAGE = 1;
-    private static       String[] PERMISSIONS_STORAGE      = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     TimePickerView view;
 
@@ -84,6 +85,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         iv.setBackgroundResource(R.drawable.kcb_picker_pic_call_add);
         TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START)
                 .recordingTimeTag("MainActivity-onCreate-Over");
+        int scaledTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
+        Log.e("scaledTouchSlop", "onCreate: " + scaledTouchSlop);
 
     }
 
