@@ -17,7 +17,7 @@ import static android.content.Context.WIFI_SERVICE;
  * @author lgh on 2020/9/27:14:17
  * @description
  */
-public class NetWorkStateUtils {
+public class NetWorkStatusUtils {
 
     public enum NetType {
         None(1),
