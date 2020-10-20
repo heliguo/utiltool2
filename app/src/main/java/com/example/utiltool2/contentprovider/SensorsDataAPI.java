@@ -1,10 +1,10 @@
 package com.example.utiltool2.contentprovider;
 
 import android.app.Application;
-import android.support.annotation.Keep;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
 
 import org.json.JSONObject;
 
@@ -69,7 +69,7 @@ public class SensorsDataAPI {
      * @param eventName  String 事件名称
      * @param properties JSONObject 事件自定义属性
      */
-    public void track(@NonNull String eventName, @Nullable JSONObject properties) {
+    public void track(@NonNull String eventName, JSONObject properties) {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("event", eventName);

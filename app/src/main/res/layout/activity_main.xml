@@ -151,6 +151,13 @@
             android:text="viewpager滑动禁止"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btn_explosion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="爆炸动画"
+            android:textAllCaps="false" />
+
 
         <com.example.utiltool2.ui.SelfImageView
             android:id="@+id/self_iv"

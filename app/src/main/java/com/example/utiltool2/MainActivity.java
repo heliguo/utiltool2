@@ -38,6 +38,7 @@ import com.example.utiltool2.ui.SelfImageView;
 import com.example.utiltool2.ui.TreeViewActivity;
 import com.example.utiltool2.ui.WeChatNavigation.WeChatBottomNavigationActivity;
 import com.example.utiltool2.ui.cardview.CardViewActivity;
+import com.example.utiltool2.ui.explosion.Impl.ExplosionActivity;
 import com.example.utiltool2.ui.huawei_loading.LoadingDialog;
 import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
@@ -79,6 +80,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_scrolltable).setOnClickListener(this);
         findViewById(R.id.btn_rv_scrolltable).setOnClickListener(this);
         findViewById(R.id.btn_annotation).setOnClickListener(this);
+        findViewById(R.id.btn_explosion).setOnClickListener(this);
         //        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
         //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
@@ -159,6 +161,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_annotation:
                 startActivity(new Intent(this, AnnotationActivity.class));
+                break;
+            case R.id.btn_explosion:
+                startActivity(new Intent(this, ExplosionActivity.class));
                 break;
 
         }

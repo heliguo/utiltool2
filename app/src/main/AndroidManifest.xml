@@ -87,6 +87,7 @@
         <activity android:name=".adapter.RViewAdapterActivity" />
         <activity android:name=".ui.ImageLoad.ImageLoadActivity" />
         <activity android:name=".updategallery.UpdateGalleryActivity" />
+        <activity android:name=".ui.explosion.Impl.ExplosionActivity" />
 
         <service android:name=".ipc.server.RemoteService" />
 
