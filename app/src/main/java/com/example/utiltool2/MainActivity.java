@@ -3,8 +3,10 @@ package com.example.utiltool2;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.bigkoo.pickerview.view.TimePickerView;
@@ -25,6 +29,9 @@ import com.example.utiltool2.aspectjannotation.PermissionDenied;
 import com.example.utiltool2.aspectjannotation.PermissionDeniedForever;
 import com.example.utiltool2.aspectjannotation.PermissionNeed;
 import com.example.utiltool2.decorator.DecoratorActivity;
+import com.example.utiltool2.download.DownLoadCompleteReceiver;
+import com.example.utiltool2.download.DownloadUtil;
+import com.example.utiltool2.download.InstallApkUtils;
 import com.example.utiltool2.exam.ExamSystem;
 import com.example.utiltool2.examination.TabLayoutActivity;
 import com.example.utiltool2.glide.GlideActivity;
@@ -44,6 +51,7 @@ import com.example.utiltool2.ui.notification.NotificationActivity;
 import com.example.utiltool2.ui.recyclerview.RecyclerViewActivity;
 import com.example.utiltool2.ui.slideview.ViewSlideActivity;
 
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,6 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     TimePickerView view;
+    private DownLoadCompleteReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +74,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 recordingTimeTag("MainActivity-onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //        verifyStoragePermissions(this);//权限申请
+
         findViewById(R.id.btn_recyclerview).setOnClickListener(this);
         findViewById(R.id.btn_notification).setOnClickListener(this);
         findViewById(R.id.btn_cardview).setOnClickListener(this);
@@ -81,6 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_rv_scrolltable).setOnClickListener(this);
         findViewById(R.id.btn_annotation).setOnClickListener(this);
         findViewById(R.id.btn_explosion).setOnClickListener(this);
+        findViewById(R.id.btn_check_update).setOnClickListener(this);
         //        findViewById(R.id.btn_decorator).setOnClickListener(this);
         SelfImageView iv = findViewById(R.id.self_iv);
         //        Glide.with(this).load(R.drawable.kcb_picker_pic_call_add).into(iv);
@@ -90,6 +100,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         int scaledTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
         Log.e("scaledTouchSlop", "onCreate: " + scaledTouchSlop);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -100,9 +116,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    private void verifyStoragePermissions(Activity activity) {
+    private boolean verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission2 = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
+
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user
@@ -112,6 +130,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     REQUEST_EXTERNAL_STORAGE
             );
         }
+        return permission == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -163,10 +182,44 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(this, AnnotationActivity.class));
                 break;
             case R.id.btn_explosion:
+
                 startActivity(new Intent(this, ExplosionActivity.class));
                 break;
 
+            case R.id.btn_check_update:
+
+                ActivityCompat.requestPermissions(
+                        this,
+                        PERMISSIONS_STORAGE,
+                        REQUEST_EXTERNAL_STORAGE
+                );
+
+                int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                if (permission != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(mContext, "程序缺少权限", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                File file = new File(getExternalFilesDir("Download").getAbsolutePath()
+                        + File.separator + "update.apk");
+                if (file.exists()) {
+                    InstallApkUtils.install(this, "update.apk");
+                } else {
+                    DownloadUtil.downloadApk(this, "http://192.168.199.198:8866/examples/app.apk", null);
+                    mReceiver = new DownLoadCompleteReceiver();
+                    IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+                    registerReceiver(mReceiver, filter);
+                }
+
+
+                break;
+
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
     }
 
     @NetworkCheck
@@ -261,5 +314,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 }
